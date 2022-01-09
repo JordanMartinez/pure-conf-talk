@@ -6,6 +6,17 @@
     "type": "git",
     "url": "git+https://github.com/JordanMartinez/pure-conf-talk.git"
   },
+  "scripts": {
+    "identity": "spago run -m CommonMonads.Identity --no-psa --quiet",
+    "common-right": "spago run -m CommonMonads.Either.Right --no-psa --quiet",
+    "common-left1": "spago run -m CommonMonads.Either.Left1 --no-psa --quiet",
+    "common-left2": "spago run -m CommonMonads.Either.Left2 --no-psa --quiet",
+    "common-effect": "spago run -m CommonMonads.Effect --no-psa --quiet",
+    "common-function": "spago run -m CommonMonads.Function --no-psa --quiet",
+    "mt-right": "spago run -m MonadTransformers.ExceptT.Right --no-psa --quiet",
+    "mt-left": "spago run -m MonadTransformers.ExceptT.Left --no-psa --quiet",
+    "mt-readert": "spago run -m MonadTransformers.ReaderT --no-psa --quiet"
+  },
   "author": "",
   "homepage": "https://github.com/JordanMartinez/pure-conf-talk",
   "devDependencies": {
