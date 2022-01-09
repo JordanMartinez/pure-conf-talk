@@ -16,6 +16,12 @@ Author of ["PureScript: Jordan's Reference"](https://github.com/jordanmartinez/p
 
 ---
 
+## Slides & Code
+
+https://github.com/JordanMartinez/pure-conf-talk
+
+---
+
 ## Outcomes
 
 - Why and when people use monad transformers?
