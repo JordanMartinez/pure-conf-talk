@@ -20,7 +20,9 @@
 1. Desugar the transformer
 1. Repeat step 2 until fully desugared
 
-## Why the Monad Transformer Stack Order Matters
+## Monad Transformer Stack Order
+
+### Why It Matters
 
 Most of the time, the order of the stack itself doesn't matter unless one is using either `MaybeT` or `ExceptT` somewhere because it short-circuits. Due to the need to throw and catch errors, one of these two transformers is usually the first layer that wraps the "base" monad.
 
@@ -30,3 +32,17 @@ Most of the time, the order of the stack itself doesn't matter unless one is usi
 | `StateT s (MaybeT Identity output)` | `state -> Identity (Maybe (Tuple state output))` | A short-circuting computation that, when fully successful, returns back the computation's result and some state | If a `Nothing` case occurs, you lose what the final `state` value was |
 | `ExceptT error (StateT s Identity output)` | `state -> Identity (Tuple state (Either error output))` | A computation that returns back some state and the result of a short-circuiting computation | If a `Left` case occurs, you still have the final `state` value |
 | `StateT s (ExceptT error Identity output)` | `state -> Identity (Either error (Tuple state output))` | A short-circuting computation that, when fully successful, returns back the computation's result and some state | If a `Left` case occurs, you lose what the final `state` value was |
+
+### Ordering the Stack
+
+Type Signatures: outermost to innermost
+```purescript
+program
+  :: forall monad output
+   . Monad m
+  => StateT Int (ExceptT String monad) output
+```
+Unwrapping: innermost is on the outside because it's the *last* newtype to unwrap. Outermost is on the inside because it's the *first* newtype to unwrap.
+```purescript
+runExceptT (runStateT program initialState)
+```
