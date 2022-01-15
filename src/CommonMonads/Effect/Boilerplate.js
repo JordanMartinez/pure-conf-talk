@@ -21,6 +21,24 @@ exports.boilerplate = () => {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // * PureScript uses "MagicDo" to
 // unnests these nested `bind` calls.
 // I've kept the nesting here
