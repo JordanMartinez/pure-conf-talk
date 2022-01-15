@@ -5,7 +5,7 @@ import Prelude hiding (bind)
 import Data.Either (Either(..))
 import Data.Identity (Identity(..))
 
--- Either monad's
+-- ExceptT monad's
 -- Left case
 doNotation
   :: Identity (Either String Int)

@@ -6,7 +6,7 @@ import Control.Monad.Except (ExceptT(..))
 import Data.Either (Either(..))
 import Data.Identity (Identity(..))
 
--- Either monad's
+-- ExceptT monad's
 -- Left case
 transformer
   :: ExceptT String Identity Int
