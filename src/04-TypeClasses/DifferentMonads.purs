@@ -88,9 +88,12 @@ main = do
 
   -- Note: the single use of `log` in the below examples enables the compiler to infer
   -- that the monadic type is `Effect`. Otherwise, an annotation would be needed.
+  --
   -- The below examples are equivalent to
+  -- ```
   -- result <- runStateT (runExceptT program) initialState
   -- log $ "Implementation - Effect - initial state of X: " <> show result
+  -- ```
   log "\n\n=== Effect ==="
   join $ map (log <<< append "ExceptTStateT - Effect - initial state of 1: " <<< show) do
     runExceptT (runStateT program 1)
