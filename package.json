@@ -21,7 +21,8 @@
     "layers-st-et-right": "spago run -m Layers.StateTExceptT.Right --no-psa --quiet",
     "layers-st-et-left": "spago run -m Layers.StateTExceptT.Left --no-psa --quiet",
     "layers-et-st-right": "spago run -m Layers.ExceptTStateT.Right --no-psa --quiet",
-    "layers-et-st-left": "spago run -m Layers.ExceptTStateT.Left --no-psa --quiet"
+    "layers-et-st-left": "spago run -m Layers.ExceptTStateT.Left --no-psa --quiet",
+    "tc-stack-order": "spago run -m TypeClasses.StackOrder --no-psa --quiet"
   },
   "author": "",
   "homepage": "https://github.com/JordanMartinez/pure-conf-talk",
