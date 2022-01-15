@@ -374,6 +374,15 @@ Answer
 
 Answer
 - Hide a lot of boilerplate with `<-`
+- Write more modular code
+
+---
+
+## Question: Why do people use monad transformers?
+
+Answer
+- Hide a lot of boilerplate with `<-`
+- Write more modular code
 - Simulate algebraric effects (Final Tagless)
 
 ---
