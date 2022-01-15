@@ -17,7 +17,8 @@
     "mt-left": "spago run -m MonadTransformers.ExceptT.Left --no-psa --quiet",
     "mt-readert": "spago run -m MonadTransformers.ReaderT --no-psa --quiet",
     "mt-statet-boring": "spago run -m MonadTransformers.StateT.Boring --no-psa --quiet",
-    "mt-statet-getput": "spago run -m MonadTransformers.StateT.GetPut --no-psa --quiet"
+    "mt-statet-getput": "spago run -m MonadTransformers.StateT.GetPut --no-psa --quiet",
+    "layers-st-et-right": "spago run -m MonadTransformers.Layers.StateTExceptT.Right --no-psa --quiet"
   },
   "author": "",
   "homepage": "https://github.com/JordanMartinez/pure-conf-talk",
