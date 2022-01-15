@@ -15,7 +15,8 @@
     "common-function": "spago run -m CommonMonads.Function --no-psa --quiet",
     "mt-right": "spago run -m MonadTransformers.ExceptT.Right --no-psa --quiet",
     "mt-left": "spago run -m MonadTransformers.ExceptT.Left --no-psa --quiet",
-    "mt-readert": "spago run -m MonadTransformers.ReaderT --no-psa --quiet"
+    "mt-readert": "spago run -m MonadTransformers.ReaderT --no-psa --quiet",
+    "mt-statet": "spago run -m MonadTransformers.StateT --no-psa --quiet"
   },
   "author": "",
   "homepage": "https://github.com/JordanMartinez/pure-conf-talk",
