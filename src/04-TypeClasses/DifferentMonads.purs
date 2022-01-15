@@ -11,7 +11,7 @@ import Data.Tuple (Tuple)
 import Effect (Effect)
 import Effect.Console (log)
 
--- Wait! Did you say "forall monadicType" 😏
+-- Wait! Did you say "forall monadicType" 🤔😏
 
 -- 1 interface
 -- 2 implementations
