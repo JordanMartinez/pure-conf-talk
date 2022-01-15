@@ -11,8 +11,8 @@ boilerplate                                                                     
   :: Int -> Identity (Tuple String Int)                                             -}
   :: Function Int (Identity (Tuple String Int))
 boilerplate one =
-  case Identity (Tuple (one + 1) one) of
-    Identity (Tuple two nextState) ->
-      case Identity (Tuple (one * 4) nextState) of
-        Identity (Tuple four nextState') ->
-          Identity (Tuple (show (two + four)) nextState')
+  case Identity     (Tuple (one + 1)           one) of
+    Identity        (Tuple two                 nextState) ->
+      case Identity (Tuple (one * 4)           nextState) of
+        Identity    (Tuple four                nextState') ->
+          Identity  (Tuple (show (two + four)) nextState')
