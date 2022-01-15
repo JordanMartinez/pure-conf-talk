@@ -383,7 +383,7 @@ Answer
 Answer
 - Hide a lot of boilerplate with `<-`
 - Write more modular code
-- Simulate algebraric effects (Final Tagless)
+- Define interfaces and implement them (Final Tagless)
 
 ---
 
