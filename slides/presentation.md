@@ -267,7 +267,7 @@ A computation with compile-time newtype boxing and unboxing
 ## Common Monadic Types: `Identity`
 
 - A "placeholder" type for a monad
-- "Fancy" function composition
+- "Boxy" function composition
 
 ---
 
