@@ -271,13 +271,13 @@ A computation with compile-time newtype boxing and unboxing
 
 ---
 
-## Common Monadic Types: `Either`
+## Common Monadic Types: `Either error`
 
 A short-circuiting computation where I care about errors
 
 ---
 
-## Common Monadic Types: `Either`
+## Common Monadic Types: `Either error`
 
 A short-circuiting computation where I care about errors
 
@@ -285,7 +285,7 @@ A short-circuiting computation where I care about errors
 
 ---
 
-## Common Monadic Types: `Effect error`
+## Common Monadic Types: `Effect`
 
 A sequence of nested closures
 
