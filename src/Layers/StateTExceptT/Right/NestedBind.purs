@@ -1,4 +1,4 @@
-module MonadTransformers.Layers.StateTExceptT.Left.NestedBind where
+module Layers.StateTExceptT.Right.NestedBind where
 
 import Prelude hiding (bind, (>>=))
 
@@ -7,18 +7,18 @@ import Data.Identity (Identity(..))
 import Data.Tuple (Tuple(..))
 
 -- StateT wrapping ExceptT wrapping monad
--- Left case
+-- Right case
 nestedBind                                                                        {-
   :: Int -> Identity (Either String (Tuple String Int))                                             -}
   :: Function Int (Identity (Either String (Tuple Int Int)))
 nestedBind = do
-  (\one -> Identity (Right (Tuple 3 one))) >>= \_three ->
+  (\one -> Identity (Right (Tuple 3 one))) >>= \three ->
 
     -- get the state
     (\one -> Identity (Right (Tuple one one))) >>= \initialState ->
 
       -- put a new state
-      (\_one -> Identity (Left "Could not put the state!")) >>= \_unit ->
+      (\_one -> Identity (Right (Tuple unit (one + three)))) >>= \_unit ->
 
         -- now the argument is different
         (\four -> Identity (Right (Tuple initialState four)))

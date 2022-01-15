@@ -1,4 +1,4 @@
-module MonadTransformers.Layers.StateTExceptT.Left.Boilerplate where
+module Layers.StateTExceptT.Right.Boilerplate where
 
 import Prelude hiding (bind, (>>=))
 
@@ -7,7 +7,7 @@ import Data.Identity (Identity(..))
 import Data.Tuple (Tuple(..))
 
 -- StateT wrapping ExceptT wrapping monad
--- Left case
+-- Right case
 boilerplate                                                                               {-
   :: Int -> Identity (Either String (Tuple String Int))                                             -}
   :: Function Int (Identity (Either String (Tuple Int Int)))
@@ -15,14 +15,14 @@ boilerplate one =
   case Identity         (Right (Tuple 3            one)) of
     Identity            (Left err) ->
       Identity (Left err)
-    Identity            (Right (Tuple _three        state1)) ->
+    Identity            (Right (Tuple three        state1)) ->
       -- get the state
       case Identity     (Right (Tuple state1       state1)) of
         Identity        (Left err) ->
           Identity (Left err)
-        Identity        (Right (Tuple initialState _state2)) ->
+        Identity        (Right (Tuple initialState state2)) ->
           -- put the state
-          case Identity (Left "Could not put the state!") of
+          case Identity (Right (Tuple unit         (state2 + three))) of
             Identity    (Left err) ->
               Identity (Left err)
             Identity    (Right (Tuple _unit        four)) ->

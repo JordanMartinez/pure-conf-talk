@@ -1,4 +1,4 @@
-module MonadTransformers.Layers.StateTExceptT.Right where
+module Layers.StateTExceptT.Right where
 
 import Prelude
 
@@ -6,10 +6,10 @@ import Control.Monad.Except (runExceptT)
 import Control.Monad.State (runStateT)
 import Effect (Effect)
 import Effect.Console (log)
-import MonadTransformers.Layers.StateTExceptT.Right.Boilerplate (boilerplate)
-import MonadTransformers.Layers.StateTExceptT.Right.DoNotation (doNotation)
-import MonadTransformers.Layers.StateTExceptT.Right.NestedBind (nestedBind)
-import MonadTransformers.Layers.StateTExceptT.Right.Transformer (transformer)
+import Layers.StateTExceptT.Right.Boilerplate (boilerplate)
+import Layers.StateTExceptT.Right.DoNotation (doNotation)
+import Layers.StateTExceptT.Right.NestedBind (nestedBind)
+import Layers.StateTExceptT.Right.Transformer (transformer)
 
 main :: Effect Unit
 main = do

@@ -1,4 +1,4 @@
-module MonadTransformers.Layers.StateTExceptT.Right.Transformer where
+module Layers.StateTExceptT.Right.Transformer where
 
 import Prelude
 

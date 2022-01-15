@@ -1,4 +1,4 @@
-module MonadTransformers.Layers.StateTExceptT.Left.DoNotation where
+module Layers.StateTExceptT.Right.DoNotation where
 
 import Prelude hiding (bind)
 
@@ -7,18 +7,18 @@ import Data.Identity (Identity(..))
 import Data.Tuple (Tuple(..))
 
 -- StateT wrapping ExceptT wrapping monad
--- Left case
+-- Right case
 doNotation                                                                        {-
   :: Int -> Identity (Either String (Tuple String Int))                           -}
   :: Function Int (Identity (Either String (Tuple Int Int)))
 doNotation = do
-  _three <- (\one -> Identity (Right (Tuple 3 one)))
+  three <- (\one -> Identity (Right (Tuple 3 one)))
 
   -- get the state
   initialState <- (\one -> Identity (Right (Tuple one one)))
 
   -- put a new state
-  (\_one -> Identity (Left "Could not put the state!"))
+  (\one -> Identity (Right (Tuple unit (one + three))))
 
   -- now the argument is different
   (\four -> Identity (Right (Tuple initialState four)))
