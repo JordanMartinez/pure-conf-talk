@@ -18,6 +18,18 @@ doNotation = do
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
   where
   bind
     :: forall input a b

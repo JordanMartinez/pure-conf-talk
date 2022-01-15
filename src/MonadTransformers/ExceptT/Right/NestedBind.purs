@@ -19,6 +19,16 @@ nestedBind =
 
 
 
+
+
+
+
+
+
+
+
+
+
 bind
   :: forall a b
     . Identity (Either String a)

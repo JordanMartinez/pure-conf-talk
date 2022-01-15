@@ -20,6 +20,17 @@ nestedBind = do
 
 
 
+
+
+
+
+
+
+
+
+
+
+
 bind
   :: forall input a b
     . (Function input (Identity a))

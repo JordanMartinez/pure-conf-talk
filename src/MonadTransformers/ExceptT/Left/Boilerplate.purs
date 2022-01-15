@@ -5,7 +5,7 @@ import Prelude
 import Data.Either (Either(..))
 import Data.Identity (Identity(..))
 
--- Either monad's
+-- ExceptT monad's
 -- Left case
 boilerplate
   :: Identity (Either String Int)

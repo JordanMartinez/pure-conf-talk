@@ -20,6 +20,15 @@ doNotation = do
 
 
 
+
+
+
+
+
+
+
+
+
   where
   bind
     :: forall a b
