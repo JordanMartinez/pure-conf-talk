@@ -8,7 +8,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Same as ReaderT/Function code
 boilerplate                                                                         {-
-  :: Int -> Identity Tuple String Int                                             -}
+  :: Int -> Identity (Tuple String Int)                                             -}
   :: Function Int (Identity (Tuple String Int))
 boilerplate one =
   case Identity (Tuple (one + 1) one) of

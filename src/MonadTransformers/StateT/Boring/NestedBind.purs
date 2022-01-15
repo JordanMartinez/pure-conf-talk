@@ -8,7 +8,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Same as ReaderT/Function code
 nestedBind                                                                        {-
-  :: Int -> Identity Tuple String Int                                             -}
+  :: Int -> Identity (Tuple String Int)                                             -}
   :: Function Int (Identity (Tuple String Int))
 nestedBind = do
   (\one -> Identity (Tuple (one + 1) one)) >>= \two ->

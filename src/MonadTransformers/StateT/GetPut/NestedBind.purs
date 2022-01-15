@@ -8,7 +8,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Now we modify the hidden state
 nestedBind                                                                        {-
-  :: Int -> Identity Tuple String Int                                             -}
+  :: Int -> Identity (Tuple String Int)                                             -}
   :: Function Int (Identity (Tuple Int Int))
 nestedBind = do
   (\one -> Identity (Tuple 3 one)) >>= \three ->

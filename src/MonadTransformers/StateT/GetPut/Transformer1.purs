@@ -9,7 +9,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Now we modify the hidden state
 transformer                                                                           {-
-  :: Int -> Identity Tuple Int Int                                                 -}
+  :: Int -> Identity (Tuple Int Int)                                                 -}
   :: StateT Int Identity Int
 transformer = do
   three <- StateT (\one -> Identity (Tuple 3 one))

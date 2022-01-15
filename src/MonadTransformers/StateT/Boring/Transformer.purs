@@ -9,7 +9,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Same as ReaderT/Function code
 transformer                                                                           {-
-  :: StateT (Int -> Identity Tuple String Int)                                             -}
+  :: StateT (Int -> Identity (Tuple String Int))                                             -}
   :: StateT Int Identity String
 transformer = do
   two <- StateT (\one -> Identity (Tuple (one + 1) one))

@@ -8,7 +8,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Now we modify the hidden state
 boilerplate                                                                        {-
-  :: Int -> Identity Tuple String Int                                             -}
+  :: Int -> Identity (Tuple String Int)                                             -}
   :: Function Int (Identity (Tuple Int Int))
 boilerplate one =
   case Identity         (Tuple 3            one) of

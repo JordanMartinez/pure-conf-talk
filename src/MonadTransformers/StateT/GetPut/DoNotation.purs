@@ -8,7 +8,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Now we modify the hidden state
 doNotation                                                                           {-
-  :: Int -> Identity Tuple Int Int                                             -}
+  :: Int -> Identity (Tuple Int Int)                                             -}
   :: Function Int (Identity (Tuple Int Int))
 doNotation = do
   three <- (\one -> Identity (Tuple 3 one))

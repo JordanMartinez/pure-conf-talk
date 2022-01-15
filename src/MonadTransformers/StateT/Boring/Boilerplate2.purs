@@ -8,7 +8,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Same as ReaderT/Function code
 boilerplate                                                                         {-
-  :: Int -> Identity Tuple String Int                                             -}
+  :: Int -> Identity (Tuple String Int)                                             -}
   :: Function Int (Identity (Tuple String Int))
 boilerplate one = do
   let initialState = Tuple (one + 1) one

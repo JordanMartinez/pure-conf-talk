@@ -8,7 +8,7 @@ import Data.Tuple (Tuple(..))
 -- StateT monad
 -- Same as ReaderT/Function code
 doNotation                                                                           {-
-  :: Int -> Identity Tuple String Int                                             -}
+  :: Int -> Identity (Tuple String Int)                                             -}
   :: Function Int (Identity (Tuple String Int))
 doNotation = do
   two <- (\one -> Identity (Tuple (one + 1) one))
