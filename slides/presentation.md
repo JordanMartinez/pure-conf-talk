@@ -76,133 +76,93 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
-## Presumptions (1/6)
+## Presumptions (1/9)
 
-1-arg function application, **NO** context:
-
-```purescript
-let
-  function :: Int -> String
-  function i = show i
-
-  arg = 1 :: Int
-
-  result :: String
-  result = function arg
-
-in result == "1"
-```
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | ... |
+| 2+ arg function application | ... | ... |
+| function composition | ... | ... |
 
 ---
 
-## Presumptions (2/6)
+## Presumptions (2/9)
 
-1-arg function application, **WITH** a `Box` / context:
-
-```purescript
-data Box a = Box a
-
-let
-  function :: Int -> String
-  function i = show i
-
-  arg = Box 1 :: Box Int
-
-  result :: Box String
-  result = function arg
-
-in result == Box "1"
-```
-
-If not, see the `Functor` type class.
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | ... |
+| 2+ arg function application | `func arg1 arg2` | ... |
+| function composition | ... | ... |
 
 ---
 
-## Presumptions (3/6)
+## Presumptions (3/9)
 
-2-arg function application, **NO**  `Box` / context:
-
-```purescript
-let
-  function :: Int -> Int -> String
-  function x y = show (i + y)
-
-  argX = 1 :: Int
-  argY = 2 :: Int
-
-  result :: String
-  result = function argX argY
-
-in result == "3"
-```
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | ... |
+| 2+ arg function application | `func arg1 arg2` | ... |
+| function composition | `aToB >>> bToC` | ... |
 
 ---
 
-## Presumptions (4/6)
+## Presumptions (4/9)
 
-2-arg function application, **WITH** a `Box` / context:
-
-```purescript
-data Box a = Box a
-
-let
-  function :: Int -> Int -> String
-  function x y = show (i + y)
-
-  argX = Box 1 :: Box Int
-  argY = Box 2 :: Box Int
-
-  result :: Box String
-  result = function <$> argX <*> argY
-
-in result == Box "3"
-```
-
-If not, see the `Apply` type class.
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | `func <$> Box arg` |
+| 2+ arg function application | `func arg1 arg2` | ... |
+| function composition | `aToB >>> bToC` | ... |
 
 ---
 
-## Presumptions (5/6)
+## Presumptions (5/9)
 
-1-arg function composition, **NO** `Box` / context:
-
-```purescript
-let
-  intToString :: Int -> String
-  intToString i = show i
-
-  stringToBoolean :: String -> Boolean
-  stringToBoolean s = s /= ""
-
-  function :: Int -> Boolean
-  function arg = stringToBoolean (intToString arg)
-
-in (function 1) == true)
-```
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | `func <$> Box arg` |
+| 2+ arg function application | `func arg1 arg2` | `func <$> Box arg1 <*> Box arg2` |
+| function composition | `aToB >>> bToC` | ... |
 
 ---
 
-## Presumptions (6/6)
+## Presumptions (6/9)
 
-1-arg function composition, **WITH** a `Box` / context:
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | `func <$> Box arg` |
+| 2+ arg function application | `func arg1 arg2` | `func <$> Box arg1 <*> Box arg2` |
+| function composition | `aToB >>> bToC` | `aToBoxB >=> bToBoxC` |
 
-```purescript
-data Box a = Box a
+---
 
-let
-  intToBoxString :: Int -> Box String
-  intToBoxString i = Box (show i)
+## Presumptions (7/9)
 
-  stringToBoxBoolean :: String -> Box Boolean
-  stringToBoxBoolean s = Box (s /= "")
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | `func <$> Box arg`<br />`Functor` |
+| 2+ arg function application | `func arg1 arg2` | `func <$> Box arg1 <*> Box arg2` |
+| function composition | `aToB >>> bToC` | `aToBoxB >=> bToBoxC` |
 
-  function :: Int -> Box Boolean
-  function arg = (intToString arg) >>= \s -> stringToBoolean s
+---
 
-in (function 1) == Box true
-```
+## Presumptions (8/9)
 
-If not, see the `Bind`/`Monad` type class.
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | `func <$> Box arg`<br />`Functor` |
+| 2+ arg function application | `func arg1 arg2` | `func <$> Box arg1 <*> Box arg2`<br />`Applicative` |
+| function composition | `aToB >>> bToC` | `aToBoxB >=> bToBoxC` |
+
+---
+
+## Presumptions (9/9)
+
+| Description | No `Box` | With `Box` |
+| - | - | - |
+| 1 arg function application | `func arg` | `func <$> Box arg`<br />`Functor` |
+| 2+ arg function application | `func arg1 arg2` | `func <$> Box arg1 <*> Box arg2`<br />`Applicative` |
+| function composition | `aToB >>> bToC` | `aToBoxB >=> bToBoxC`<br />`Monad` |
 
 ---
 
