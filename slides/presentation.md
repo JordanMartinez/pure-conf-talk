@@ -24,8 +24,9 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ## Outcomes
 
-- Why and when people use monad transformers?
-- How do I use monad transformers?
+- Why use monad transformers?
+- When?
+- How?
 
 ---
 
@@ -325,25 +326,25 @@ Making `<-` hide even more boilerplate
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 Answer
 - Hide a lot of boilerplate with `<-`
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 Answer
 - <del>Hide a lot of boilerplate with `<-`</del>
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 Answer
 - <del>Hide a lot of boilerplate with `<-`</del>
@@ -389,7 +390,7 @@ I want to augment a monadic computation...
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 Answer
 - <del>Hide a lot of boilerplate with `<-`</del>
@@ -398,7 +399,7 @@ Answer
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 Answer
 - <del>Hide a lot of boilerplate with `<-`</del>
@@ -407,7 +408,7 @@ Answer
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 Answer
 - <del>Hide a lot of boilerplate with `<-`</del>
@@ -417,7 +418,7 @@ Answer
 
 ---
 
-## Why do people use monad transformers?
+## Why use monad transformers?
 
 Answer
 - <del>Hide a lot of boilerplate with `<-`</del>
