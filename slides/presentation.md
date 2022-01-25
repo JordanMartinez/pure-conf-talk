@@ -16,7 +16,7 @@ Author of ["PureScript: Jordan's Reference"](https://github.com/jordanmartinez/p
 
 ---
 
-## Slides & Code
+## Code, Slides, & Recording
 
 https://github.com/JordanMartinez/pure-conf-talk
 
