@@ -31,18 +31,14 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ## Agenda
 
-- What problem do monad transformers solve?
-  - The Monad Solution
-  - The Monad Transformer Solution
+- What problem do monads & monad transformers solve?
 
 ---
 
 ## Agenda
 
-- What problem do monad transformers solve?
-  - The Monad Solution
-  - The Monad Transformer Solution
-- Monad transformer examples: "unsugared" vs "do notation"
+- What problem do monads & monad transformers solve?
+- "boilerplate" vs "do notation"
   - `ExceptT`
   - `ReaderT`
   - `StateT`
@@ -51,42 +47,28 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ## Agenda
 
-- What problem do monad transformers solve?
-  - The Monad Solution
-  - The Monad Transformer Solution
-- Monad transformer examples: "unsugared" vs "do notation"
+- What problem do monads & monad transformers solve?
+- "boilerplate" vs "do notation"
   - `ExceptT`
   - `ReaderT`
   - `StateT`
-- Why the monad transformer stack's "order" matters
+- Monad transformer stack order
 
 ---
 
 ## Agenda
 
-- What problem do monad transformers solve?
-  - The Monad Solution
-  - The Monad Transformer Solution
-- Monad transformer examples: "unsugared" vs "do notation"
+- What problem do monads & monad transformers solve?
+- "boilerplate" vs "do notation"
   - `ExceptT`
   - `ReaderT`
   - `StateT`
-- Why the monad transformer stack's "order" matters
-- Hiding stack order via type classes
+- Monad transformer stack order
+- Type classes and transformer relationship
 
 ---
 
-## Presumptions (1/9)
-
-| Description | No `Box` | With `Box` |
-| - | - | - |
-| 1 arg function application | `func arg` | ... |
-| 2+ arg function application | ... | ... |
-| function composition | ... | ... |
-
----
-
-## Presumptions (2/9)
+## Audience Presumptions (1/7)
 
 | Description | No `Box` | With `Box` |
 | - | - | - |
@@ -96,7 +78,7 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
-## Presumptions (3/9)
+## Audience Presumptions (2/7)
 
 | Description | No `Box` | With `Box` |
 | - | - | - |
@@ -106,17 +88,7 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
-## Presumptions (4/9)
-
-| Description | No `Box` | With `Box` |
-| - | - | - |
-| 1 arg function application | `func arg` | `func <$> Box arg` |
-| 2+ arg function application | `func arg1 arg2` | ... |
-| function composition | `aToB >>> bToC` | ... |
-
----
-
-## Presumptions (5/9)
+## Audience Presumptions (3/7)
 
 | Description | No `Box` | With `Box` |
 | - | - | - |
@@ -126,7 +98,7 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
-## Presumptions (6/9)
+## Audience Presumptions (4/7)
 
 | Description | No `Box` | With `Box` |
 | - | - | - |
@@ -136,27 +108,7 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
-## Presumptions (7/9)
-
-| Description | No `Box` | With `Box` |
-| - | - | - |
-| 1 arg function application | `func arg` | `func <$> Box arg`<br />`Functor` |
-| 2+ arg function application | `func arg1 arg2` | `func <$> Box arg1 <*> Box arg2` |
-| function composition | `aToB >>> bToC` | `aToBoxB >=> bToBoxC` |
-
----
-
-## Presumptions (8/9)
-
-| Description | No `Box` | With `Box` |
-| - | - | - |
-| 1 arg function application | `func arg` | `func <$> Box arg`<br />`Functor` |
-| 2+ arg function application | `func arg1 arg2` | `func <$> Box arg1 <*> Box arg2`<br />`Applicative` |
-| function composition | `aToB >>> bToC` | `aToBoxB >=> bToBoxC` |
-
----
-
-## Presumptions (9/9)
+## Audience Presumptions (5/7)
 
 | Description | No `Box` | With `Box` |
 | - | - | - |
@@ -166,10 +118,26 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
-## What problem do monads solve?
+## Audience Presumptions (6/7)
 
 ```
-xxxxxxxxxxx-xxxx "yyyyyyyyyy-yyy" computations
+  do
+a <- foo
+b <- bar
+pure $ a + b
+```
+
+---
+
+## Audience Presumptions (7/7)
+
+```
+  do
+bind foo (\a ->
+  bind bar (\b ->
+    pure $ a + b
+  )
+)
 ```
 
 ---
@@ -177,7 +145,7 @@ xxxxxxxxxxx-xxxx "yyyyyyyyyy-yyy" computations
 ## What problem do monads solve?
 
 ```
-xxxxxxxxxxx-xxxx "sequential-ish" computations
+yyyyyyyyyy computations
 ```
 
 ---
@@ -185,7 +153,15 @@ xxxxxxxxxxx-xxxx "sequential-ish" computations
 ## What problem do monads solve?
 
 ```
-xxxxxxxxxxx-xxxx "sequential-ish" computations
+sequential computations
+```
+
+---
+
+## What problem do monads solve?
+
+```
+sequential computations
 ```
 
 1. Do this
@@ -195,7 +171,7 @@ xxxxxxxxxxx-xxxx "sequential-ish" computations
 ## What problem do monads solve?
 
 ```
-xxxxxxxxxxx-xxxx "sequential-ish" computations
+sequential computations
 ```
 
 1. Do this
@@ -206,7 +182,7 @@ xxxxxxxxxxx-xxxx "sequential-ish" computations
 ## What problem do monads solve?
 
 ```
-xxxxxxxxxxx-xxxx "sequential-ish" computations
+sequential computations
 ```
 
 1. Do this
@@ -218,66 +194,58 @@ xxxxxxxxxxx-xxxx "sequential-ish" computations
 ## What problem do monads solve?
 
 ```
-xxxxxxxxxxx-xxxx "sequential-ish" computations
+sequential computations
 ```
 
 1. Do this
 2. Then do that
 3. Then do something else
 4. ...
+---
+
+## A Monadic Type Example: `Identity _`
 
 ---
 
-## What problem do monads solve?
-
-```
-xxxxxxxxxxx-xxxx "sequential-ish" computations
-```
-
----
-
-## What problem do monads solve?
-
-```
-boilerplate-free "sequential-ish" computations
-```
-
----
-
-## What problem do monads solve?
-
-```
-boilerplate-free "sequential-ish" computations
-```
-
-Common Monadic Types:
-- `Identity`
-- `Either`
-- `Effect`
-- `Function`
-
----
-
-## Common Monadic Types: `Identity`
+## A Monadic Type Example: `Identity _`
 
 A computation with compile-time newtype boxing and unboxing
 
 ---
 
-## Common Monadic Types: `Identity`
+## A Monadic Type Example: `Identity _`
 
-- A "placeholder" type for a monad
-- "Boxy" function composition
+- compile-time "boxy" function composition
 
 ---
 
-## Common Monadic Types: `Either error`
+## What problem do monads solve?
+
+```
+sequential computations
+```
+
+---
+
+## What problem do monads solve?
+
+```
+"sequential-ish" computations
+```
+
+---
+
+## A Monadic Type Example: `Either error _`
+
+---
+
+## A Monadic Type Example: `Either error _`
 
 A short-circuiting computation where I care about errors
 
 ---
 
-## Common Monadic Types: `Either error`
+## A Monadic Type Example: `Either error _`
 
 A short-circuiting computation where I care about errors
 
@@ -285,30 +253,30 @@ A short-circuiting computation where I care about errors
 
 ---
 
-## Common Monadic Types: `Effect`
-
-A sequence of nested closures
+## A Monadic Type Example: `inputArg -> _`
 
 ---
 
-## Common Monadic Types: `Effect`
-
-A sequence of nested closures
-
-Provide one closure that runs all others when called
-
----
-
-## Common Monadic Types: `Function inputArg`
+## A Monadic Type Example: `inputArg -> _`
 
 Compute something while having access to the function's argument at any point
 
 ---
 
+## A Monadic Type Example: `state -> Tuple _ state`
+
+---
+
+## A Monadic Type Example: `state -> Tuple _ state`
+
+Compute something while getting/setting/modifying a value on the side
+
+---
+
 ## What problem do monads solve?
 
 ```
-boilerplate-free "sequential-ish" computations
+"sequential-ish" computations
 ```
 
 ---
@@ -319,17 +287,15 @@ boilerplate-free "sequential-ish" computations
 boilerplate-free "sequential-ish" computations
 ```
 
-Boilerplate hidden by the `<-` in "do notation"
+---
+
+## How do monads solve it?
 
 ---
 
-## What problem do monads solve?
+## How do monads solve it?
 
-```
-(boilerplate)-free "sequential-ish" computations
-```
-
-Boilerplate hidden by the `<-` in "do notation"
+By hiding boilerplate via the `<-` in "do notation"
 
 ---
 
@@ -359,31 +325,130 @@ Making `<-` hide even more boilerplate
 
 ---
 
-## Question: Why do people use monad transformers?
+## Why do people use monad transformers?
 
 ---
 
-## Question: Why do people use monad transformers?
+## Why do people use monad transformers?
 
 Answer
 - Hide a lot of boilerplate with `<-`
 
 ---
 
-## Question: Why do people use monad transformers?
+## Why do people use monad transformers?
 
 Answer
-- Hide a lot of boilerplate with `<-`
-- Write more modular code
+- <del>Hide a lot of boilerplate with `<-`</del>
 
 ---
 
-## Question: Why do people use monad transformers?
+## Why do people use monad transformers?
 
 Answer
-- Hide a lot of boilerplate with `<-`
-- Write more modular code
-- Define interfaces and implement them (Final Tagless)
+- <del>Hide a lot of boilerplate with `<-`</del>
+- Add effects to existing computations
+
+---
+
+## Adding effects...
+
+I want to augment a monadic computation...
+
+---
+
+## Adding effects...
+
+I want to augment a monadic computation...
+
+... with short-circuiting capabilities
+
+---
+
+## Adding effects...
+
+I want to augment a monadic computation...
+
+... to return 0, 1, or many outputs of the same type
+
+---
+
+## Adding effects...
+
+I want to augment a monadic computation...
+
+... to return an additional output besides the main one
+
+---
+
+## Adding effects...
+
+I want to augment a monadic computation...
+
+... to remove callback hell
+
+---
+
+## Why do people use monad transformers?
+
+Answer
+- <del>Hide a lot of boilerplate with `<-`</del>
+- Add effects to existing computations
+- Write more decoupled code
+
+---
+
+## Why do people use monad transformers?
+
+Answer
+- <del>Hide a lot of boilerplate with `<-`</del>
+- Add effects to existing computations
+- Write more decoupled code
+
+---
+
+## Why do people use monad transformers?
+
+Answer
+- <del>Hide a lot of boilerplate with `<-`</del>
+- Add effects to existing computations
+- Write more decoupled code
+- Define interfaces (type classes) and implement them (transformers)
+
+---
+
+## Why do people use monad transformers?
+
+Answer
+- <del>Hide a lot of boilerplate with `<-`</del>
+- Add effects to existing computations
+- Write more decoupled code
+- Define interfaces (type classes) and implement them (transformers)
+  - Tagless Final Encoding
+
+---
+
+## Agenda
+
+- What problem do monads & monad transformers solve?
+- "boilerplate" vs "do notation"
+  - `ExceptT`
+  - `ReaderT`
+  - `StateT`
+- Monad transformer stack order
+- Type classes and transformer relationship
+
+---
+
+## Agenda
+
+- <del>What problem do monads & monad transformers solve?</del>
+- "boilerplate" vs "do notation"
+  - `ExceptT`
+  - `ReaderT`
+  - `StateT`
+- Monad transformer stack order
+- Type classes and transformer relationship
 
 ---
 
