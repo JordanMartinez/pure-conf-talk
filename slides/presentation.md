@@ -14,6 +14,8 @@ Core Team Member (as of Summer 2020)
 
 Author of ["PureScript: Jordan's Reference"](https://github.com/jordanmartinez/purescript-jordans-reference)
 
+Work at Arista Networks, Inc.
+
 ---
 
 ## Code, Slides, & Recording
