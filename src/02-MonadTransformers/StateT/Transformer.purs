@@ -1,4 +1,4 @@
-module MonadTransformers.StateT.GetPut.Transformer where
+module MonadTransformers.StateT.Transformer where
 
 import Prelude
 

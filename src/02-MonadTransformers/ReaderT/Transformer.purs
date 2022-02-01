@@ -13,4 +13,6 @@ transformer = do
 
   four <- ReaderT (\one -> Identity (one * 4))
 
-  ReaderT (\_one -> Identity (show (two + four)))
+  one <- ReaderT (\one -> Identity one)
+
+  ReaderT (\_one -> Identity (show (two + four + one)))

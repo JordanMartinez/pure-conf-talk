@@ -12,7 +12,9 @@ nestedBind = do
 
     (\one -> Identity (one * 4)) >>= \four ->
 
-      \_one -> Identity (show (two + four))
+      (\one -> Identity one) >>= \one ->
+
+        \_one -> Identity (show (two + four + one))
 
 
 

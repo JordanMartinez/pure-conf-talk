@@ -1,4 +1,4 @@
-module MonadTransformers.StateT.GetPut.Boilerplate where
+module MonadTransformers.StateT.Boilerplate where
 
 import Prelude hiding (bind, (>>=))
 

@@ -1,4 +1,4 @@
-module MonadTransformers.StateT.Boring.NestedBind where
+module MonadTransformers.StateT.NestedBind where
 
 import Prelude hiding (bind, (>>=))
 
@@ -6,17 +6,21 @@ import Data.Identity (Identity(..))
 import Data.Tuple (Tuple(..))
 
 -- StateT monad
--- Same as ReaderT/Function code
+-- Now we modify the hidden state
 nestedBind                                                                        {-
   :: Int -> Identity (Tuple String Int)                                             -}
-  :: Function Int (Identity (Tuple String Int))
+  :: Function Int (Identity (Tuple Int Int))
 nestedBind = do
-  (\one -> Identity (Tuple (one + 1) one)) >>= \two ->
+  (\one -> Identity (Tuple 3 one)) >>= \three ->
 
-    (\one -> Identity (Tuple (one * 4) one)) >>= \four ->
+    -- get the state
+    (\one -> Identity (Tuple one one)) >>= \initialState ->
 
-      \_one -> Identity (Tuple (show (two + four)) one)
+      -- put a new state
+      (\_one -> Identity (Tuple unit (one + three))) >>= \_unit ->
 
+        -- now the argument is different
+        (\four -> Identity (Tuple initialState four))
 
 
 

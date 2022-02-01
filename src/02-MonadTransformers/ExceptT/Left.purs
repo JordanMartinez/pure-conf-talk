@@ -10,6 +10,7 @@ import MonadTransformers.ExceptT.Left.Boilerplate (boilerplate)
 import MonadTransformers.ExceptT.Left.DoNotation (doNotation)
 import MonadTransformers.ExceptT.Left.NestedBind (nestedBind)
 import MonadTransformers.ExceptT.Left.Transformer (transformer)
+import MonadTransformers.ExceptT.Left.Typeclass (typeclass)
 
 main :: Effect Unit
 main = do
@@ -23,8 +24,11 @@ main = do
     $ "ExceptT - Left Do Notation: "
     <> show doNotation
   log
-    $ "ExceptT - Right Transformer: "
+    $ "ExceptT - Left Transformer: "
     <> showT transformer
+  log
+    $ "ExceptT - Left Typeclass:   "
+    <> showT typeclass
 
 -- Necessary because ExceptT doesn't have a `Show` instance
 showT :: forall a. Show a => ExceptT String Identity a -> String

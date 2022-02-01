@@ -12,7 +12,9 @@ doNotation = do
 
   four <- (\one -> Identity (one * 4))
 
-  (\_one -> Identity (show (two + four)))
+  one <- (\one -> Identity one)
+
+  (\_one -> Identity (show (two + four + one)))
 
 
 

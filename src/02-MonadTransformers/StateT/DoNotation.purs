@@ -1,4 +1,4 @@
-module MonadTransformers.StateT.Boring.DoNotation where
+module MonadTransformers.StateT.DoNotation where
 
 import Prelude hiding (bind)
 
@@ -6,16 +6,21 @@ import Data.Identity (Identity(..))
 import Data.Tuple (Tuple(..))
 
 -- StateT monad
--- Same as ReaderT/Function code
+-- Now we modify the hidden state
 doNotation                                                                           {-
-  :: Int -> Identity (Tuple String Int)                                             -}
-  :: Function Int (Identity (Tuple String Int))
+  :: Int -> Identity (Tuple Int Int)                                             -}
+  :: Function Int (Identity (Tuple Int Int))
 doNotation = do
-  two <- (\one -> Identity (Tuple (one + 1) one))
+  three <- (\one -> Identity (Tuple 3 one))
 
-  four <- (\one -> Identity (Tuple (one * 4) one))
+  -- get the state
+  initialState <- (\one -> Identity (Tuple one one))
 
-  (\_one -> Identity (Tuple (show (two + four)) one))
+  -- put a new state
+  (\one -> Identity (Tuple unit (one + three)))
+
+  -- now the argument is different
+  (\four -> Identity (Tuple initialState four))
 
 
 
@@ -45,3 +50,5 @@ doNotation = do
           inputToIdentityB = f a
         in
           inputToIdentityB nextState
+
+  discard = bind
