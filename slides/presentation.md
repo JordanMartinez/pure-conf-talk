@@ -27,21 +27,20 @@ https://github.com/JordanMartinez/pure-conf-talk
 ## Outcomes
 
 - Why use monad transformers?
-- When?
 - How?
 
 ---
 
 ## Agenda
 
-- What problem do monads & monad transformers solve?
+- Why: What problem do monads & monad transformers solve?
 
 ---
 
 ## Agenda
 
-- What problem do monads & monad transformers solve?
-- "boilerplate" vs "do notation"
+- Why: What problem do monads & monad transformers solve?
+- How: Reimplementing monad transformers
   - `ExceptT`
   - `ReaderT`
   - `StateT`
@@ -50,24 +49,12 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ## Agenda
 
-- What problem do monads & monad transformers solve?
-- "boilerplate" vs "do notation"
+- Why: What problem do monads & monad transformers solve?
+- How: Reimplementing monad transformers
   - `ExceptT`
   - `ReaderT`
   - `StateT`
-- Monad transformer stack order
-
----
-
-## Agenda
-
-- What problem do monads & monad transformers solve?
-- "boilerplate" vs "do notation"
-  - `ExceptT`
-  - `ReaderT`
-  - `StateT`
-- Monad transformer stack order
-- Type classes and transformer relationship
+- Usage & Mistakes: Stacks and stack order
 
 ---
 
@@ -147,112 +134,62 @@ bind foo (\a ->
 
 ## What problem do monads solve?
 
-```
-yyyyyyyyyy computations
-```
+---
+
+## What problem do monads solve?
+
+Replacing procedural statements with sequential expressions
+
+## What problem do monads solve?
+
+Foreground vs Background
 
 ---
 
 ## What problem do monads solve?
 
-```
-sequential computations
-```
+![Foreground vs Background](./foreground-background.jpg)
 
 ---
 
 ## What problem do monads solve?
 
-```
-sequential computations
-```
-
-1. Do this
+Foreground = "do notation" syntax
 
 ---
 
 ## What problem do monads solve?
 
-```
-sequential computations
-```
-
-1. Do this
-2. Then do that
+Background = "`bind` implementation"
 
 ---
 
 ## What problem do monads solve?
 
-```
-sequential computations
-```
-
-1. Do this
-2. Then do that
-3. Then do something else
+Foreground = sequential computation
 
 ---
 
 ## What problem do monads solve?
 
-```
-sequential computations
-```
+Background = boilerplate-y boxing and unboxing
 
-1. Do this
-2. Then do that
-3. Then do something else
-4. ...
+---
+
+## Common Monadic Types
+
+- `Either error _`
+- `Function input _`
+- `state -> Tuple _ state`
+- `Effect _`
+
 ---
 
 ## A Monadic Type Example: `Identity _`
 
 ---
 
-## A Monadic Type Example: `Identity _`
-
-A computation with compile-time newtype boxing and unboxing
-
----
-
-## A Monadic Type Example: `Identity _`
-
-- compile-time "boxy" function composition
-
----
-
-## What problem do monads solve?
-
-```
-sequential computations
-```
-
----
-
-## What problem do monads solve?
-
-```
-"sequential-ish" computations
-```
-
----
-
 ## A Monadic Type Example: `Either error _`
-
----
-
-## A Monadic Type Example: `Either error _`
-
-A short-circuiting computation where I care about errors
-
----
-
-## A Monadic Type Example: `Either error _`
-
-A short-circuiting computation where I care about errors
-
-"Keep 'computing' until I am done or hit a `Left` case"
 
 ---
 
@@ -260,71 +197,99 @@ A short-circuiting computation where I care about errors
 
 ---
 
-## A Monadic Type Example: `inputArg -> _`
-
-Compute something while having access to the function's argument at any point
-
----
-
 ## A Monadic Type Example: `state -> Tuple _ state`
 
 ---
 
-## A Monadic Type Example: `state -> Tuple _ state`
-
-Compute something while getting/setting/modifying a value on the side
+## A Monadic Type Example: `Effect _`
 
 ---
 
 ## What problem do monads solve?
 
+Via "do notation," monads provide a **syntax** for running "computations" in a sequential order.
+
+---
+
+## What problem do monads solve?
+
+Replace statements...
+
 ```
-"sequential-ish" computations
+foo();
+const bar = baz();
+return true;
 ```
 
 ---
 
 ## What problem do monads solve?
 
-```
-boilerplate-free "sequential-ish" computations
-```
-
----
-
-## How do monads solve it?
-
----
-
-## How do monads solve it?
-
-By hiding boilerplate via the `<-` in "do notation"
-
----
-
-## What problem do monads transformers solve?
+... with expressions
 
 ```
-(xxxx xxxx boilerplate)-free "sequential-ish" computations
+foo
+bar <- baz
+pure true
 ```
 
 ---
 
-## What problem do monads transformers solve?
+## What problem do monads NOT solve?
+
+
+---
+
+## What problem do monads NOT solve?
 
 ```
-(even more boilerplate)-free "sequential-ish" computations
+try {
+  throw new Error("My bad!");
+  console.log("I never get printed! 😭");
+} catch (e) {
+  console.log("Something went wrong...");
+}
 ```
 
 ---
 
-## What problem do monads transformers solve?
+## What problem do monads NOT solve?
 
 ```
-(even more boilerplate)-free "sequential-ish" computations
+const x = "Hello World!";
+const f = function () {
+  console.log(x);
+};
+f();
 ```
 
-Making `<-` hide even more boilerplate
+---
+
+## What problem do monads NOT solve?
+
+```
+let x = 1;
+x += 1;
+x = 5;
+```
+
+---
+
+How do we implement these features?
+
+---
+
+Monad Transformers
+
+---
+
+## How do monad transformers solve these problems?
+
+---
+
+## How do monad transformers solve these problems?
+
+By **simulating** these "effects"
 
 ---
 
@@ -334,136 +299,361 @@ Making `<-` hide even more boilerplate
 
 ## Why use monad transformers?
 
-Answer
-- Hide a lot of boilerplate with `<-`
+- Add such "effects" to sequential computations
 
 ---
 
 ## Why use monad transformers?
 
-Answer
-- <del>Hide a lot of boilerplate with `<-`</del>
-
----
-
-## Why use monad transformers?
-
-Answer
-- <del>Hide a lot of boilerplate with `<-`</del>
-- Add effects to existing computations
-
----
-
-## Adding effects...
-
-I want to augment a monadic computation...
-
----
-
-## Adding effects...
-
-I want to augment a monadic computation...
-
-... with short-circuiting capabilities
-
----
-
-## Adding effects...
-
-I want to augment a monadic computation...
-
-... to return 0, 1, or many outputs of the same type
-
----
-
-## Adding effects...
-
-I want to augment a monadic computation...
-
-... to return an additional output besides the main one
-
----
-
-## Adding effects...
-
-I want to augment a monadic computation...
-
-... to remove callback hell
-
----
-
-## Why use monad transformers?
-
-Answer
-- <del>Hide a lot of boilerplate with `<-`</del>
-- Add effects to existing computations
+- Add such "effects" to sequential computations
 - Write more decoupled code
-
----
-
-## Why use monad transformers?
-
-Answer
-- <del>Hide a lot of boilerplate with `<-`</del>
-- Add effects to existing computations
-- Write more decoupled code
-
----
-
-## Why use monad transformers?
-
-Answer
-- <del>Hide a lot of boilerplate with `<-`</del>
-- Add effects to existing computations
-- Write more decoupled code
-- Define interfaces (type classes) and implement them (transformers)
-
----
-
-## Why use monad transformers?
-
-Answer
-- <del>Hide a lot of boilerplate with `<-`</del>
-- Add effects to existing computations
-- Write more decoupled code
-- Define interfaces (type classes) and implement them (transformers)
-  - Tagless Final Encoding
 
 ---
 
 ## Agenda
 
-- What problem do monads & monad transformers solve?
-- "boilerplate" vs "do notation"
+- Why: What problem do monads & monad transformers solve?
+- How: Reimplementing monad transformers
   - `ExceptT`
   - `ReaderT`
   - `StateT`
-- Monad transformer stack order
-- Type classes and transformer relationship
+- Usage & Mistakes: Stacks and stack order
 
 ---
 
 ## Agenda
 
-- <del>What problem do monads & monad transformers solve?</del>
-- "boilerplate" vs "do notation"
+- <del>Why: What problem do monads & monad transformers solve?</del>
+- How: Reimplementing monad transformers
   - `ExceptT`
   - `ReaderT`
   - `StateT`
-- Monad transformer stack order
-- Type classes and transformer relationship
+- Usage & Mistakes: Stacks and stack order
 
 ---
 
-## Remaining work
+## Monad Transformers
 
-- Show concrete example of stack of 1
-  - shown
-  - highlight boilerplate hidden by `<-`
-  - don't use any of the 'newtypes', but just set `bind` to something else
-- Show concrete example of stack of 2
-- Show how stack order does not matter
-- Show how stack order does matter
-- Making stack order implicit
+**Simulate** effects
+
+---
+
+## Simulating Effects
+
+`try ... catch`
+
+---
+
+## Simulating Effects
+
+`try ... catch`
+
+`Either`
+
+---
+
+## Simulating Effects
+
+`global reference`
+
+---
+
+## Simulating Effects
+
+`global reference`
+
+`\globalRef -> ...`
+
+---
+
+## Simulating Effects
+
+`let x = 0; x += 1;`
+
+---
+
+## Simulating Effects
+
+`let x = 0; x += 1;`
+
+`\oldState -> Tuple output (oldState + 1)`
+
+---
+
+## Simulating Effects
+
+---
+
+## Simulating Effects
+
+Have you seen that boilerplate?
+
+## Simulating Effects with Boilerplate
+
+`try ... catch`
+
+`Either`
+
+---
+
+## Simulating Effects with Boilerplate
+
+`global reference`
+
+`\globalRef -> ...`
+
+---
+
+## Simulating Effects with Boilerplate
+
+`let x = 0; x += 1;`
+
+`\oldState -> Tuple output (oldState + 1)`
+
+---
+
+## Simulating Effects with Boilerplate
+
+.·´¯`(>▂<)´¯`·.
+
+---
+
+## Simulating Effects with Boilerplate
+
+If only...
+
+---
+
+## Simulating Effects with Boilerplate
+
+But don't monads...?
+
+---
+
+## Simulating Effects with Boilerplate
+
+Can we transform monads...?
+
+---
+
+## Simulating Effects with Boilerplate
+
+---
+
+## Implementing `try ... catch`
+
+`monad output`
+
+---
+
+## Implementing `try ... catch`
+
+`monad (Either error output)`
+
+---
+
+## Implementing `try ... catch`
+
+```
+newtype ExceptT error monad output =
+  ExceptT (monad (Either error output)
+```
+
+---
+
+## Implementing `try ... catch`
+
+```
+-- try
+throwError :: forall m e o. e -> m (Either e o)
+
+-- catch
+catchError :: forall m e o. m (Either e o) -> (e -> m (Either e o)) -> m (Either e o)
+```
+
+---
+
+## Implementing `global reference`
+
+`monad output`
+
+---
+
+## Implementing `global reference`
+
+`globalRef -> monad output`
+
+---
+
+## Implementing `global reference`
+
+```
+newtype ReaderT globalRef monad output =
+  ReaderT (globalRef -> monad output)
+```
+
+---
+
+## Implementing `global reference`
+
+```
+ask :: forall m globalRef. m globalRef
+```
+
+---
+
+## Implementing `let x = 0; x += 1`
+
+`monad output`
+
+---
+
+## Implementing `let x = 0; x += 1`
+
+`state -> monad (Tuple output state)`
+
+---
+
+## Implementing `let x = 0; x += 1`
+
+```
+newtype StateT state monad output =
+  StateT (state -> monad (Tuple output state))
+```
+
+---
+
+## Implementing `let x = 0; x += 1`
+
+```
+get :: forall m state. m state
+
+put :: forall m. m Unit
+```
+
+---
+
+## Agenda
+
+- <del>Why: What problem do monads & monad transformers solve?</del>
+- How: Reimplementing monad transformers
+  - `ExceptT`
+  - `ReaderT`
+  - `StateT`
+- Usage & Mistakes: Stacks and stack order
+
+---
+
+## Agenda
+
+- <del>Why: What problem do monads & monad transformers solve?</del>
+- <del>How: Reimplementing monad transformers</del>
+  - <del>`ExceptT`</del>
+  - <del>`ReaderT`</del>
+  - <del>`StateT`</del>
+- Usage & Mistakes: Stacks and stack order
+
+---
+
+## Usage & Mistakes
+
+---
+
+## Usage & Mistakes
+
+Don't!
+
+---
+
+## Usage & Mistakes
+
+One Transformer?
+
+---
+
+## Usage & Mistakes
+
+```
+foo :: Effect Unit
+foo =
+  result <- runExceptT do
+    resp1 <- callApiRequest1
+    resp2 <- callApiRequest2
+    resp3 <- callApiRequest3
+    pure $ ...
+  case result of
+    Left e -> ...
+    Right a -> ...
+```
+
+---
+
+## Usage & Mistakes
+
+```
+foo :: Effect Unit
+foo = runExceptT programdo
+  where
+  program
+    :: forall m
+     . MonadError String m
+    => m SomeValue
+  program = do
+    resp1 <- callApiRequest1
+    resp2 <- callApiRequest2
+    resp3 <- callApiRequest3
+    pure $ ...
+```
+
+---
+
+## Usage & Mistakes
+
+Multiple Transformers?
+
+---
+
+## Usage & Mistakes
+
+Stack and Stack Order
+
+---
+
+## Usage & Mistakes
+
+`forall monad. ....`
+
+---
+
+## Agenda
+
+- <del>Why: What problem do monads & monad transformers solve?</del>
+- <del>How: "boilerplate" vs "do notation"</del>
+  - <del>`ExceptT`</del>
+  - <del>`ReaderT`</del>
+  - <del>`StateT`</del>
+- Usage & Mistakes: Stacks and stack order
+
+---
+
+## Agenda
+
+- <del>Why: What problem do monads & monad transformers solve?</del>
+- <del>How: "boilerplate" vs "do notation"</del>
+  - <del>`ExceptT`</del>
+  - <del>`ReaderT`</del>
+  - <del>`StateT`</del>
+- <del>Usage & Mistakes: Stacks and stack order</del>
+
+---
+
+## Where do we go from here?
+
+- https://github.com/JordanMartinez/pure-conf-talk)
+  - Desugar transformers to concrete types
+  - Sugar concrete types to transformers
+  - See each syntax version for each transformer
+  - Run simple examples of transformers
+- Explore the Capability Pattern
 
 ---
