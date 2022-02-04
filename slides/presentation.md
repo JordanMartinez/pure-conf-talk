@@ -280,14 +280,14 @@ Monad Transformers
 
 ## Why use monad transformers?
 
-- Add such "effects" to sequential computations
+- Add such "effects"
 
 ---
 
 ## Why use monad transformers?
 
-- Add such "effects" to sequential computations
-- Write more decoupled code
+- Add such "effects"
+- Decouple code
 
 ---
 
