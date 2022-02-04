@@ -755,3 +755,24 @@ vs
   - `src` directory - each transformer: boilerplate, nested bind, do notation, transformer
   - Run examples of transformers (`package.json` scripts)
 - Explore the Capability Pattern
+
+---
+
+## Summary
+
+- Expressions, not statements
+
+---
+
+## Summary
+
+- Expressions, not statements
+- Add effects via transformers
+
+---
+
+## Summary
+
+- Expressions, not statements
+- Add effects via transformers
+- Stack Order & `forall monad`
