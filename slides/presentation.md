@@ -182,7 +182,6 @@ Background = boilerplate-y boxing and unboxing
 - `Identity`
 - `Either error _`
 - `Function input _`
-- `state -> Tuple _ state`
 
 ---
 
@@ -195,10 +194,6 @@ Background = boilerplate-y boxing and unboxing
 ---
 
 ## A Monadic Type Example: `inputArg -> _`
-
----
-
-## A Monadic Type Example: `state -> Tuple _ state`
 
 ---
 
