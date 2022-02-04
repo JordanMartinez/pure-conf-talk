@@ -13,6 +13,8 @@
     "common-left2": "spago run -m CommonMonads.Either.Left2 --no-psa --quiet",
     "common-effect": "spago run -m CommonMonads.Effect --no-psa --quiet",
     "common-function": "spago run -m CommonMonads.Function --no-psa --quiet",
+    "painful-ps": "spago run -m PainfulExpression --no-psa --quiet",
+    "painful-js": "node src/01-CommonMonads/PainfulExpressionJs.js",
     "mt-right": "spago run -m MonadTransformers.ExceptT.Right --no-psa --quiet",
     "mt-left": "spago run -m MonadTransformers.ExceptT.Left --no-psa --quiet",
     "mt-readert": "spago run -m MonadTransformers.ReaderT --no-psa --quiet",
