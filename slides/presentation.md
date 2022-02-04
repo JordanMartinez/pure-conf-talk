@@ -510,10 +510,12 @@ newtype ExceptT error monad output =
 
 ```
 -- throw
-throwError :: forall m e o. e -> m (Either e o)
+throwError:: forall m e o. MonadThrow e m =>
+  e -> m (Either e o)
 
 -- try ... catch
-catchError :: forall m e o. m (Either e o) -> (e -> m (Either e o)) -> m (Either e o)
+catchError :: forall m e o. MonadError e m =>
+  m (Either e o) -> (e -> m (Either e o)) -> m (Either e o)
 ```
 
 ---
@@ -542,7 +544,7 @@ newtype ReaderT globalRef monad output =
 ## Implementing `global reference`
 
 ```
-ask :: forall m globalRef. m globalRef
+ask :: forall m globalRef. MonadReader globalRef m => m globalRef
 ```
 
 ---
@@ -571,9 +573,9 @@ newtype StateT state monad output =
 ## Implementing `let x = 0; x += 1`
 
 ```
-get :: forall m state. m state
+get :: forall m state. MonadState state m => m state
 
-put :: forall m state. state -> m Unit
+put :: forall m state. MonadState state m => state -> m Unit
 ```
 
 ---
