@@ -469,10 +469,10 @@ newtype ExceptT error monad output =
 ## Implementing `try ... catch`
 
 ```
--- try
+-- throw
 throwError :: forall m e o. e -> m (Either e o)
 
--- catch
+-- try ... catch
 catchError :: forall m e o. m (Either e o) -> (e -> m (Either e o)) -> m (Either e o)
 ```
 
