@@ -179,10 +179,10 @@ Background = boilerplate-y boxing and unboxing
 
 ## Common Monadic Types
 
+- `Identity`
 - `Either error _`
 - `Function input _`
 - `state -> Tuple _ state`
-- `Effect _`
 
 ---
 
@@ -199,10 +199,6 @@ Background = boilerplate-y boxing and unboxing
 ---
 
 ## A Monadic Type Example: `state -> Tuple _ state`
-
----
-
-## A Monadic Type Example: `Effect _`
 
 ---
 
@@ -451,7 +447,7 @@ try {
 }
 ```
 
-`\globalRef -> state -> Effect (Tuple (Either Error Output) State)`
+`globalRef -> state -> Effect (Tuple (Either Error Output) State)`
 
 ---
 
