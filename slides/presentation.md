@@ -638,7 +638,7 @@ foo =
 ## Usage & Mistakes
 
 ```
-foo :: Effect Unit
+foo :: Effect (Either String SomeValue)
 foo = runExceptT program do
   where
   program
