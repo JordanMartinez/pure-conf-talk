@@ -639,7 +639,7 @@ foo =
 
 ```
 foo :: Effect (Either String SomeValue)
-foo = runExceptT program do
+foo = runExceptT program
   where
   program
     :: forall m
