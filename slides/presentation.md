@@ -417,6 +417,21 @@ Have you seen that boilerplate?
 
 ## Simulating Effects with Boilerplate
 
+```
+try {
+  let x = globalRef * 5;
+  x = x + anotherGlobalRef;
+  if (x > someMagicValue) throw new Error("x is too large");
+  return x;
+} catch (e) {
+  ...
+}
+```
+
+---
+
+## Simulating Effects with Boilerplate
+
 <pre><code>
 .·´¯`(>▂<)´¯`·.
 </code></pre>
