@@ -28,6 +28,7 @@ program = do
 -- Note: the first transformer newtype we unwrap is the OUTERMOST transformer.
 main :: Effect Unit
 main = do
+  log "No Errors"
   log
     $ "ExceptTStateT with initial state of 1: "
     -- The type annotation here is only needed because the
@@ -35,13 +36,15 @@ main = do
     -- The compiler has no way to know.
     <> show (runExceptT (runStateT program 1) :: Identity (Either String (Tuple Boolean Int)))
   log
+    $ "StateTExceptT with initial state of 1: "
+    <> show (runStateT (runExceptT program) 1 :: Identity (Tuple (Either String Boolean) Int))
+
+  log "\nErrors"
+  log
     $ "ExceptTStateT with initial state of 5: "
     -- `runExcept` is `runExceptT` with the `monadicType` specified to `Identity`
     -- So, no type annotation is needed here.
     <> show (runExcept (runStateT program 5))
-  log
-    $ "StateTExceptT with initial state of 1: "
-    <> show (runStateT (runExceptT program) 1 :: Identity (Tuple (Either String Boolean) Int))
   log
     $ "StateTExceptT with initial state of 5: "
     -- Each monad transformer has a `runNameT` and `runName` function
