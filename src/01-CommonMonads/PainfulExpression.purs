@@ -7,9 +7,9 @@ import Data.Tuple (Tuple(..))
 import Effect (Effect)
 import Effect.Console (log)
 
-type GlobalRef =
-  { globalRef1 :: Int
-  , globalRef2 :: Int
+type ReadOnlyConfig =
+  { age :: Int
+  , max :: Int
   }
 type State = Int
 type Output = String
@@ -17,16 +17,16 @@ type Error = String
 
 main :: Effect Unit
 main = do
-  let globalRefs = { globalRef1: 8, globalRef2: 10 }
+  let config = { age: 8, max: 10 }
   let x = 5
-  out <- example globalRefs x
+  out <- example config x
   log $ show out
 
 effect :: forall a. a -> Effect a
 effect = pure
 
-example :: GlobalRef -> State -> Effect (Tuple (Either Error Output) State)
-example refs initialState =
+example :: ReadOnlyConfig -> State -> Effect (Tuple (Either Error Output) State)
+example config initialState =
   catchBlock tryBlock
   where
   tryBlock :: Effect (Tuple (Either Error Output) State)
@@ -38,13 +38,13 @@ example refs initialState =
         effect (Tuple (Left e1) x)
       Right _ -> do
         -- `x1 = x + globalRef1`
-        Tuple either2 x1 <- effect (Tuple (Right unit) (x + refs.globalRef1))
+        Tuple either2 x1 <- effect (Tuple (Right unit) (x + config.age))
         case either2 of
           Left e2 -> do
             effect (Tuple (Left e2) x1)
           Right _ -> do
             log $ "x is " <> show x1
-            if x1 > refs.globalRef2 then do
+            if x1 > config.max then do
               effect (Tuple (Left "x is too large") x1)
             else do
               effect (Tuple (Right "Everything is fine") x1)

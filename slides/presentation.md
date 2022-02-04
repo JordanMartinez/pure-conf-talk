@@ -334,9 +334,9 @@ Have you seen that boilerplate?
 ```
 try {
   let x = 5;
-  x = x + globalRef1;
+  x = x + config.age;
   console.log(`x is ${x}`);
-  if (x > globalRef2) throw new Error("x is too large");
+  if (x > config.max) throw new Error("x is too large");
   return "Everything is fine!";
 } catch (e) {
   console.log(e);
