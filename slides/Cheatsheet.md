@@ -39,7 +39,7 @@ Type Signatures: outermost to innermost
 ```purescript
 program
   :: forall monad output
-   . Monad m
+   . Monad monad
   => StateT Int (ExceptT String monad) output
 ```
 Unwrapping: innermost is on the outside because it's the *last* newtype to unwrap. Outermost is on the inside because it's the *first* newtype to unwrap.
