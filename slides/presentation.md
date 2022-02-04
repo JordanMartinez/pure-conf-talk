@@ -424,19 +424,18 @@ runExceptT (ExceptT ma) = ma
 
 ```
 -- throw
-class Monad m <= MonadThrow e m | e -> m where
-  throwError :: forall o. e -> m (Either e o)
-  throwError e = pure $ Left e
+throwError :: forall m e o. Monad m =>
+  e -> m (Either e o)
+throwError e = pure $ Left e
 
 -- try ... catch
-class MonadThrow e m <= MonadError e m | e -> m where
-  catchError :: forall o.
-    m (Either e o) -> (e -> m (Either e o)) -> m (Either e o)
-  catchError ma handler = do
-    either <- ma
-    case either of
-      Left e -> handler e
-      right -> pure right
+catchError :: forall m e o. Monad m =>
+  m (Either e o) -> (e -> m (Either e o)) -> m (Either e o)
+catchError ma handler = do
+  either <- ma
+  case either of
+    Left e -> handler e
+    right -> pure right
 ```
 
 ---
@@ -469,12 +468,9 @@ runReaderT (ReaderT argToMa) arg = argToMa arg
 ## Implementing `global reference`
 
 ```
-class MonadAsk globalRef m | globalRef -> m where
-  ask :: m globalRef
-  ask = (\arg -> pure arg)
+ask :: forall m globalVal. Monad m => m globalVal
+ask = (\arg -> pure arg)
 ```
-
-(See also `MonadReader`)
 
 ---
 
@@ -506,13 +502,12 @@ runStateT (ReaderT sToMa) initialState = sToMa initialState
 ## Implementing `let x = 0; x += 1`
 
 ```
-class MonadState s m | s -> m where
-  get :: m state
+get :: forall m state. Monad m => m state
+get = (\currentState -> pure (Tuple currentState currentState))
 
-  put :: state -> m Unit
+put :: forall m state. Monad m => state -> m Unit
+put newState = pure (Tuple unit newState)
 ```
-
-(Implemented differently in real code)
 
 ---
 
