@@ -274,16 +274,6 @@ Monad Transformers
 
 ---
 
-## How do monad transformers solve these problems?
-
----
-
-## How do monad transformers solve these problems?
-
-By **simulating** these "effects"
-
----
-
 ## Why use monad transformers?
 
 ---
