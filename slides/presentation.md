@@ -136,7 +136,27 @@ bind foo (\a ->
 
 ## What problem do monads solve?
 
-Replacing procedural statements with sequential expressions
+```
+foo();
+const bar = baz();
+return true;
+```
+
+---
+
+## What problem do monads solve?
+
+```
+foo
+bar <- baz
+pure true
+```
+
+---
+
+## What problem do monads solve?
+
+Statements vs Expression
 
 ---
 
@@ -203,30 +223,6 @@ Background = boilerplate-y boxing and unboxing
 ## What problem do monads solve?
 
 Via "do notation," monads provide a **syntax** for running "computations" in a sequential order.
-
----
-
-## What problem do monads solve?
-
-Replace statements...
-
-```
-foo();
-const bar = baz();
-return true;
-```
-
----
-
-## What problem do monads solve?
-
-... with expressions
-
-```
-foo
-bar <- baz
-pure true
-```
 
 ---
 
