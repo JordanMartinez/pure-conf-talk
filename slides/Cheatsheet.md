@@ -2,23 +2,25 @@
 
 ## Sugaring a Concrete Type into a Monad Transformer Stack
 
-1. Identify the "base" monad
-1. Look at the output type and desugar accordingly:
-    - if a `Maybe`, then sugar into `MaybeT`
-    - if an `Either`, then sugar into `ExceptT`
-    - if a `List`, then sugar into `ListT`
-    - if a `Tuple a x` where `x` is a standalone `Monoid`, then sugar into `WriterT`
-    - if a `Tuple a x` where `x` is part of a function argument's type, then sugar into `StateT`
-    - if just an `a` and the monad is the output of a single-arg function, then sugar into a `ReaderT`
-    - if just an `a` and the monad is the output of a callback-like function, then sugar into a `ContT`
-1. Repeat step 2 until fully sugared
+1. Identify the "base" monad (referenced as `m` below)
+1. Look at the output type and sugar accordingly:
+    a. if a `Maybe a`, then `m` becomes `MaybeT m`
+    b. if an `Either e a`, then sugar into `ExceptT e m`
+    c. if a `Tuple a x` where `x` is a standalone `Monoid`, then sugar into `WriterT x m a`
+    d. if a `Tuple a x` where `x` is part of a function argument's type, then sugar into `StateT x m a`
+    e. if just an `a` and the monad is the output of a single-arg function (`r -> m a`), then sugar into a `ReaderT r m a`
+2. Repeat step 2 until fully sugared
 
 ## Desugaring a Monad Transformer Stack into a Concrete Type
 
 1. Identify the "base" monad
-1. Find the innermost transformer
-1. Desugar the transformer
-1. Repeat step 2 until fully desugared
+2. Find the transformer that immediately wraps `m` and desugar accordingly:
+    a. if a `MaybeT m a`, then sugar into `m (Maybe a)` and update `m` to refer to `m (Maybe)`
+    b. if an `ExceptT e m a`, then sugar into `m (Either e a)` and update `m` to refer to `m (Either e)`
+    c. if a `WriterT w m a`, ten sugar into `m (Tuple a w)` and update `m` to refer to `m (Tuple _ w)`
+    d. if a `StateT s m a`, then sugar into `s -> m (Tuple a s)` and update `m` to refer to `m (Tuple _ s)`
+    e. if a `ReaderT r m a`, then sugar into `r -> m a`
+3. Repeat step 2 until fully desugared
 
 ## Monad Transformer Stack Order
 
