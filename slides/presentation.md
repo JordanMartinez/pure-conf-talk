@@ -697,6 +697,12 @@ vs
 
 ---
 
+## Usage & Mistakes
+
+`npm run tc-different-monads`
+
+---
+
 ## Agenda
 
 - <del>Why: What problem do monads & monad transformers solve?</del>
