@@ -676,6 +676,14 @@ Stack and Stack Order
 
 ## Usage & Mistakes
 
+`Left error`
+vs
+`Tuple (Left error) state`
+
+---
+
+## Usage & Mistakes
+
 `npm run layers-st-et-right`
 `npm run layers-st-et-left`
 `npm run layers-et-st-right`
