@@ -208,6 +208,10 @@ Background = boilerplate-y boxing and unboxing
 
 ## What problem do monads solve?
 
+---
+
+## What problem do monads solve?
+
 Via "do notation," monads provide a **syntax** for running "computations" in a sequential order.
 
 ---
