@@ -742,6 +742,40 @@ vs
 
 ## Where do we go from here?
 
+---
+
+## Where do we go from here?
+
+- https://github.com/JordanMartinez/pure-conf-talk
+  - `slides/CheatSheet.md`
+      - Monad Transformers <-> Concrete types
+      - Stack Order
+
+---
+
+## Where do we go from here?
+
+- https://github.com/JordanMartinez/pure-conf-talk
+  - `slides/CheatSheet.md`
+      - Monad Transformers <-> Concrete types
+      - Stack Order
+  - `src` directory - each transformer: boilerplate, nested bind, do notation, transformer
+
+---
+
+## Where do we go from here?
+
+- https://github.com/JordanMartinez/pure-conf-talk
+  - `slides/CheatSheet.md`
+      - Monad Transformers <-> Concrete types
+      - Stack Order
+  - `src` directory - each transformer: boilerplate, nested bind, do notation, transformer
+  - Run examples of transformers (`package.json` scripts)
+
+---
+
+## Where do we go from here?
+
 - https://github.com/JordanMartinez/pure-conf-talk
   - `slides/CheatSheet.md`
       - Monad Transformers <-> Concrete types
