@@ -356,6 +356,14 @@ By **simulating** these "effects"
 
 `let x = 0; x += 1;`
 
+`Tuple output state`
+
+---
+
+## Simulating Effects
+
+`let x = 0; x += 1;`
+
 `\oldState -> Tuple output (oldState + 1)`
 
 ---
