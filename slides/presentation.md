@@ -307,9 +307,14 @@ Monad Transformers
 
 ---
 
-## Monad Transformers
 
-**Simulate** effects
+## How do monad transformers solve these problems?
+
+---
+
+## How do monad transformers solve these problems?
+
+By **simulating** these "effects"
 
 ---
 
