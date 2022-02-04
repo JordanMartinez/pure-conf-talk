@@ -122,7 +122,6 @@ pure $ a + b
 ## Audience Presumptions (7/7)
 
 ```
-  do
 bind foo (\a ->
   bind bar (\b ->
     pure $ a + b
@@ -139,6 +138,8 @@ bind foo (\a ->
 ## What problem do monads solve?
 
 Replacing procedural statements with sequential expressions
+
+---
 
 ## What problem do monads solve?
 
@@ -388,6 +389,8 @@ By **simulating** these "effects"
 
 Have you seen that boilerplate?
 
+---
+
 ## Simulating Effects with Boilerplate
 
 `try ... catch`
@@ -414,7 +417,9 @@ Have you seen that boilerplate?
 
 ## Simulating Effects with Boilerplate
 
+<pre><code>
 .·´¯`(>▂<)´¯`·.
+</code></pre>
 
 ---
 
@@ -456,7 +461,7 @@ Can we transform monads...?
 
 ```
 newtype ExceptT error monad output =
-  ExceptT (monad (Either error output)
+  ExceptT (monad (Either error output))
 ```
 
 ---
@@ -528,7 +533,7 @@ newtype StateT state monad output =
 ```
 get :: forall m state. m state
 
-put :: forall m. m Unit
+put :: forall m state. state -> m Unit
 ```
 
 ---
@@ -592,7 +597,7 @@ foo =
 
 ```
 foo :: Effect Unit
-foo = runExceptT programdo
+foo = runExceptT program do
   where
   program
     :: forall m
@@ -628,7 +633,7 @@ Stack and Stack Order
 ## Agenda
 
 - <del>Why: What problem do monads & monad transformers solve?</del>
-- <del>How: "boilerplate" vs "do notation"</del>
+- <del>How: Reimplementing monad transformers</del>
   - <del>`ExceptT`</del>
   - <del>`ReaderT`</del>
   - <del>`StateT`</del>
@@ -639,7 +644,7 @@ Stack and Stack Order
 ## Agenda
 
 - <del>Why: What problem do monads & monad transformers solve?</del>
-- <del>How: "boilerplate" vs "do notation"</del>
+- <del>How: Reimplementing monad transformers</del>
   - <del>`ExceptT`</del>
   - <del>`ReaderT`</del>
   - <del>`StateT`</del>
@@ -655,5 +660,3 @@ Stack and Stack Order
   - See each syntax version for each transformer
   - Run simple examples of transformers
 - Explore the Capability Pattern
-
----
