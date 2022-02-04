@@ -621,16 +621,12 @@ One Transformer?
 ## Usage & Mistakes
 
 ```
-foo :: Effect Unit
-foo =
-  result <- runExceptT do
-    resp1 <- callApiRequest1
-    resp2 <- callApiRequest2
-    resp3 <- callApiRequest3
-    pure $ ...
-  case result of
-    Left e -> ...
-    Right a -> ...
+foo :: Effect (Either String SomeValue)
+foo = runExceptT do
+  resp1 <- callApiRequest1
+  resp2 <- callApiRequest2
+  resp3 <- callApiRequest3
+  pure $ ...
 ```
 
 ---
