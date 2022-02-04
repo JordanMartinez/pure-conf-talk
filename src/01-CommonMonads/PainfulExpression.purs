@@ -17,12 +17,9 @@ type Error = String
 
 main :: Effect Unit
 main = do
-  out <- example
-    -- global references
-    { globalRef1: 8, globalRef2: 10 }
-    -- let x = 5
-    5
-
+  let globalRefs = { globalRef1: 8, globalRef2: 10 }
+  let x = 5
+  out <- example globalRefs x
   log $ show out
 
 effect :: forall a. a -> Effect a
