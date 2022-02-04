@@ -431,7 +431,7 @@ If only...
 
 ## Simulating Effects with Boilerplate
 
-But don't monads...?
+But wait! Don't monads...?
 
 ---
 
