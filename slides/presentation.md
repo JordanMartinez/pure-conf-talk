@@ -26,35 +26,30 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ## Outcomes
 
-- Why use monad transformers?
-- How?
+- Why
+- Intuition
+- Use them now
 
 ---
 
 ## Agenda
 
-- Why: What problem do monads & monad transformers solve?
+- Why & What
 
 ---
 
 ## Agenda
 
-- Why: What problem do monads & monad transformers solve?
-- How: Reimplementing monad transformers
-  - `ExceptT`
-  - `ReaderT`
-  - `StateT`
+- What and Why
+- Thought Process
 
 ---
 
 ## Agenda
 
-- Why: What problem do monads & monad transformers solve?
-- How: Reimplementing monad transformers
-  - `ExceptT`
-  - `ReaderT`
-  - `StateT`
-- Usage & Mistakes: Stacks and stack order
+- What and Why
+- Thought Process
+- Usage & Mistakes
 
 ---
 
@@ -308,23 +303,17 @@ By **simulating** these "effects"
 
 ## Agenda
 
-- Why: What problem do monads & monad transformers solve?
-- How: Reimplementing monad transformers
-  - `ExceptT`
-  - `ReaderT`
-  - `StateT`
-- Usage & Mistakes: Stacks and stack order
+- What and Why
+- Thought Process
+- Usage & Mistakes
 
 ---
 
 ## Agenda
 
-- <del>Why: What problem do monads & monad transformers solve?</del>
-- How: Reimplementing monad transformers
-  - `ExceptT`
-  - `ReaderT`
-  - `StateT`
-- Usage & Mistakes: Stacks and stack order
+- <del>What and Why</del>
+- Thought Process
+- Usage & Mistakes
 
 ---
 
@@ -599,23 +588,17 @@ class MonadState s m | s -> m where
 
 ## Agenda
 
-- <del>Why: What problem do monads & monad transformers solve?</del>
-- How: Reimplementing monad transformers
-  - `ExceptT`
-  - `ReaderT`
-  - `StateT`
-- Usage & Mistakes: Stacks and stack order
+- <del>What and Why</del>
+- Thought Process
+- Usage & Mistakes
 
 ---
 
 ## Agenda
 
-- <del>Why: What problem do monads & monad transformers solve?</del>
-- <del>How: Reimplementing monad transformers</del>
-  - <del>`ExceptT`</del>
-  - <del>`ReaderT`</del>
-  - <del>`StateT`</del>
-- Usage & Mistakes: Stacks and stack order
+- <del>What and Why</del>
+- <del>Thought Process</del>
+- Usage & Mistakes
 
 ---
 
@@ -715,23 +698,17 @@ vs
 
 ## Agenda
 
-- <del>Why: What problem do monads & monad transformers solve?</del>
-- <del>How: Reimplementing monad transformers</del>
-  - <del>`ExceptT`</del>
-  - <del>`ReaderT`</del>
-  - <del>`StateT`</del>
-- Usage & Mistakes: Stacks and stack order
+- <del>What and Why</del>
+- <del>Thought Process</del>
+- Usage & Mistakes
 
 ---
 
 ## Agenda
 
-- <del>Why: What problem do monads & monad transformers solve?</del>
-- <del>How: Reimplementing monad transformers</del>
-  - <del>`ExceptT`</del>
-  - <del>`ReaderT`</del>
-  - <del>`StateT`</del>
-- <del>Usage & Mistakes: Stacks and stack order</del>
+- <del>What and Why</del>
+- <del>Thought Process</del>
+- <del>Usage & Mistakes</del>
 
 ---
 
