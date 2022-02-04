@@ -720,7 +720,7 @@ vs
 
 ## Where do we go from here?
 
-- https://github.com/JordanMartinez/pure-conf-talk)
+- https://github.com/JordanMartinez/pure-conf-talk
   - `slides/CheatSheet.md`
       - Monad Transformers <-> Concrete types
       - Stack Order
