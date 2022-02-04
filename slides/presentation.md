@@ -776,3 +776,10 @@ vs
 - Expressions, not statements
 - Add effects via transformers
 - Stack Order & `forall monad`
+
+---
+
+## Contact Me
+
+Discord: @JordanMartinez
+GitHub: @JordanMartinez
