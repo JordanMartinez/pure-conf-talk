@@ -585,7 +585,7 @@ class MonadState s m | s -> m where
   put :: state -> m Unit
 ```
 
-(Implemented differently in real **code**)
+(Implemented differently in real code)
 
 ---
 
