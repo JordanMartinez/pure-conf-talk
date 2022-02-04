@@ -700,9 +700,9 @@ Stack and Stack Order
 
 ## Usage & Mistakes
 
-`Left error`
-vs
 `Tuple (Left error) state`
+vs
+`Left error`
 
 ---
 
