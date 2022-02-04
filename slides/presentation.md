@@ -162,7 +162,7 @@ Statements vs Expression
 
 ## What problem do monads solve?
 
-Foreground vs Background
+Analogy: Foreground vs Background
 
 ---
 
