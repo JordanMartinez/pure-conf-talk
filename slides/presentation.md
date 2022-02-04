@@ -668,6 +668,12 @@ Stack and Stack Order
 
 ## Usage & Mistakes
 
+`npm run tc-stack-order`
+
+---
+
+## Usage & Mistakes
+
 `state -> monad (Tuple (Either err output) state)`
 
 `state -> monad (Either err (Tuple output state)`
@@ -679,15 +685,6 @@ Stack and Stack Order
 `Left error`
 vs
 `Tuple (Left error) state`
-
----
-
-## Usage & Mistakes
-
-`npm run layers-st-et-right`
-`npm run layers-st-et-left`
-`npm run layers-et-st-right`
-`npm run layers-et-st-left`
 
 ---
 
