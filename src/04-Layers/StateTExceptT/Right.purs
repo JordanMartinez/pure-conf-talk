@@ -2,7 +2,7 @@ module Layers.StateTExceptT.Right where
 
 import Prelude
 
-import Control.Monad.Except (runExceptT)
+import Control.Monad.Except (runExcept, runExceptT)
 import Control.Monad.State (runStateT)
 import Effect (Effect)
 import Effect.Console (log)
@@ -10,6 +10,7 @@ import Layers.StateTExceptT.Right.Boilerplate (boilerplate)
 import Layers.StateTExceptT.Right.DoNotation (doNotation)
 import Layers.StateTExceptT.Right.NestedBind (nestedBind)
 import Layers.StateTExceptT.Right.Transformer (transformer)
+import Layers.StateTExceptT.Right.Typeclass (typeclass)
 
 main :: Effect Unit
 main = do
@@ -27,3 +28,7 @@ main = do
     -- Note: `runStateT` and `runExceptT` could be replaced with `unwrap`
     -- from `Data.Newtype (unwrap)`
     <> show (runExceptT (runStateT transformer 1))
+  log
+    $ "StateTExcepT - Right - Typeclass:   "
+    -- Note: using `runExcept` here forces the monad to be `Identity`
+    <> show (runExcept (runStateT typeclass 1))
