@@ -451,11 +451,16 @@ runExceptT (ExceptT ma) = ma
 ## Implementing `try ... catch`
 
 ```
--- throw
+-- throw new Error
 throwError :: forall m e o. Monad m =>
   e -> m (Either e o)
 throwError e = pure $ Left e
 
+---
+
+## Implementing `try ... catch`
+
+```
 -- try ... catch
 catchError :: forall m e o. Monad m =>
   m (Either e o) -> (e -> m (Either e o)) -> m (Either e o)
@@ -532,7 +537,13 @@ runStateT (ReaderT sToMa) initialState = sToMa initialState
 ```
 get :: forall m state. Monad m => m state
 get = (\currentState -> pure (Tuple currentState currentState))
+```
 
+---
+
+## Implementing `let x = 0; x += 1`
+
+```
 put :: forall m state. Monad m => state -> m Unit
 put newState = pure (Tuple unit newState)
 ```
