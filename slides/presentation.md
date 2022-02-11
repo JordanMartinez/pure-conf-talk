@@ -193,11 +193,11 @@ x = 5;
 
 ---
 
-How do we implement these features?
+## How do we implement these features?
 
 ---
 
-Monad Transformers
+## Monad Transformers
 
 ---
 
