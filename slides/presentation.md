@@ -275,15 +275,15 @@ By making `<-` hide more boilerplate
 
 ## Simulating Effects
 
-`readOnlyConfig`
+`readOnlyValue`
 
 ---
 
 ## Simulating Effects
 
-`readOnlyConfig`
+`readOnlyValue`
 
-`\readOnlyConfig -> ...`
+`\readOnlyValue -> ...`
 
 ---
 
@@ -329,9 +329,9 @@ Have you seen that boilerplate?
 
 ## Simulating Effects with Boilerplate
 
-`readOnlyConfig`
+`readOnlyValue`
 
-`\readOnlyConfig -> ...`
+`\readOnlyValue -> ...`
 
 ---
 
@@ -375,7 +375,7 @@ try {
 }
 ```
 
-`readOnlyConfig -> state -> Effect (Tuple (Either Error Output) State)`
+`readOnlyValue -> state -> Effect (Tuple (Either Error Output) State)`
 
 ---
 
@@ -454,23 +454,23 @@ catchError ma handler = do
 
 ---
 
-## Implementing `global reference`
+## Implementing `readOnlyValue`
 
 `monad output`
 
 ---
 
-## Implementing `global reference`
+## Implementing `readOnlyValue`
 
-`globalRef -> monad output`
+`readOnlyValue -> monad output`
 
 ---
 
-## Implementing `global reference`
+## Implementing `readOnlyValue`
 
 ```
-newtype ReaderT globalRef monad output =
-  ReaderT (globalRef -> monad output)
+newtype ReaderT readOnlyValue monad output =
+  ReaderT (readOnlyValue -> monad output)
 ```
 
 ```
@@ -479,7 +479,7 @@ runReaderT (ReaderT argToMa) arg = argToMa arg
 
 ---
 
-## Implementing `global reference`
+## Implementing `readOnlyValue`
 
 ```
 ask :: forall m globalVal. Monad m => m globalVal
