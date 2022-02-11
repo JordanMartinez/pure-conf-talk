@@ -20,9 +20,9 @@ boilerplate one =
       case Identity     (Tuple (Right state1)       state1) of
         Identity        (Tuple (Left err)           state2) ->
           Identity (Tuple (Left err) state2)
-        Identity        (Tuple (Right initialState) state2) ->
+        Identity        (Tuple (Right initialState) _state2) ->
           -- put the state
-          case Identity (Tuple (Right unit)         (state2 + three)) of
+          case Identity (Tuple (Right unit)         (initialState + three)) of
             Identity    (Tuple (Left err)        four) ->
               Identity (Tuple (Left err) four)
             Identity    (Tuple (Right _unit)        four) ->

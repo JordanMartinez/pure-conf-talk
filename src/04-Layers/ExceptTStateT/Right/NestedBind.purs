@@ -18,7 +18,7 @@ nestedBind = do
     (\one -> Identity (Tuple (Right one) one)) >>= \initialState ->
 
       -- put a new state
-      (\_one -> Identity (Tuple (Right unit) (one + three))) >>= \_unit ->
+      (\_one -> Identity (Tuple (Right unit) (initialState + three))) >>= \_unit ->
 
         -- now the argument is different
         (\four -> Identity (Tuple (Right initialState) four))

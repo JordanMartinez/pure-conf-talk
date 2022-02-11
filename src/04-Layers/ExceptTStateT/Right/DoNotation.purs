@@ -18,7 +18,7 @@ doNotation = do
   initialState <- (\one -> Identity (Tuple (Right one) one))
 
   -- put a new state
-  (\one -> Identity (Tuple (Right unit) (one + three)))
+  (\_one -> Identity (Tuple (Right unit) (initialState + three)))
 
   -- now the argument is different
   (\four -> Identity (Tuple (Right initialState) four))
