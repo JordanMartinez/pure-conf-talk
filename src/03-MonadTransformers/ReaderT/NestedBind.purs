@@ -8,9 +8,9 @@ import Data.Identity (Identity(..))
 nestedBind
   :: Function Int (Identity String)
 nestedBind = do
-  (\one -> Identity (one + 1)) >>= \two ->
+  (\_one -> Identity 2) >>= \two ->
 
-    (\one -> Identity (one * 4)) >>= \four ->
+    (\_one -> Identity 4) >>= \four ->
 
       (\one -> Identity one) >>= \one ->
 

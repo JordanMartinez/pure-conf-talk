@@ -1,4 +1,4 @@
-module MonadTransformers.ExceptT.Right.Transformer where
+module MonadTransformers.ExceptT.Left.TransformerExplicit where
 
 import Prelude
 
@@ -7,11 +7,11 @@ import Data.Either (Either(..))
 import Data.Identity (Identity(..))
 
 -- ExceptT monad's
--- Right case
-transformer
+-- Left case
+transformerExplicit
   :: ExceptT String Identity Int
-transformer = do
-  one <- ExceptT (Identity (Right 1))
+transformerExplicit = do
+  one <- ExceptT (Identity (Left "Error in step 1"))
 
   two <- ExceptT (Identity (Right 2))
 

@@ -2,16 +2,17 @@ module MonadTransformers.ReaderT.Typeclass where
 
 import Prelude
 
-import Control.Monad.Reader (ReaderT(..), ask)
-import Data.Identity (Identity(..))
+import Control.Monad.Reader (class MonadReader, ask)
 
 -- ReaderT monad
 typeclass
-  :: ReaderT Int Identity String
+  :: forall m
+   . MonadReader Int m
+  => m String
 typeclass = do
-  two <- ReaderT (\one -> Identity (one + 1))
+  two <- pure 2
 
-  four <- ReaderT (\one -> Identity (one * 4))
+  four <- pure 4
 
   one <- ask
 

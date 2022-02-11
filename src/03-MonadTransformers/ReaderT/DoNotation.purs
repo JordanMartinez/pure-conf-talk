@@ -8,9 +8,9 @@ import Data.Identity (Identity(..))
 doNotation
   :: Function Int (Identity String)
 doNotation = do
-  two <- (\one -> Identity (one + 1))
+  two <- (\_one -> Identity 2)
 
-  four <- (\one -> Identity (one * 4))
+  four <- (\_one -> Identity 4)
 
   one <- (\one -> Identity one)
 

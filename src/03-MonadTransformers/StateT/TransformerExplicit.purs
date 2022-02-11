@@ -1,4 +1,4 @@
-module MonadTransformers.StateT.Transformer where
+module MonadTransformers.StateT.TransformerExplicit where
 
 import Prelude
 
@@ -8,10 +8,10 @@ import Data.Tuple (Tuple(..))
 
 -- StateT monad
 -- Now we modify the hidden state
-transformer                                                                           {-
+transformerExplicit                                                                           {-
   :: Int -> Identity (Tuple Int Int)                                                 -}
   :: StateT Int Identity Int
-transformer = do
+transformerExplicit = do
   three <- StateT (\one -> Identity (Tuple 3 one))
 
   -- get the state

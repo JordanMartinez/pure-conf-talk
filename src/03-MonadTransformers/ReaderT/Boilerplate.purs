@@ -8,9 +8,9 @@ import Data.Identity (Identity(..))
 boilerplate
   :: Function Int (Identity String)
 boilerplate one =
-  case Identity         (one + 1) of
+  case Identity         2 of
     Identity two ->
-      case Identity     (one * 4) of
+      case Identity     4 of
         Identity four ->
           case Identity one of
             Identity _one ->

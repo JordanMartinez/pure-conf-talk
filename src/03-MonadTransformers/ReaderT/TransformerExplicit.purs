@@ -1,4 +1,4 @@
-module MonadTransformers.ReaderT.Transformer where
+module MonadTransformers.ReaderT.TransformerExplicit where
 
 import Prelude
 
@@ -6,12 +6,12 @@ import Control.Monad.Reader (ReaderT(..))
 import Data.Identity (Identity(..))
 
 -- ReaderT monad
-transformer
+transformerExplicit
   :: ReaderT Int Identity String
-transformer = do
-  two <- ReaderT (\one -> Identity (one + 1))
+transformerExplicit = do
+  two <- ReaderT (\_one -> Identity 2)
 
-  four <- ReaderT (\one -> Identity (one * 4))
+  four <- ReaderT (\_one -> Identity 4)
 
   one <- ReaderT (\one -> Identity one)
 
