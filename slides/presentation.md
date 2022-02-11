@@ -592,7 +592,8 @@ Multiple Transformers?
 
 ## Usage & Mistakes
 
-Multiple Transformers?
+Use type classes to encode business logic
+
 
 ---
 
