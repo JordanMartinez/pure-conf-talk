@@ -616,6 +616,14 @@ Stack and Stack Order
 
 ## Usage & Mistakes
 
+`Tuple (Right output) state`
+vs
+`Right (Tuple output  state)`
+
+---
+
+## Usage & Mistakes
+
 `Tuple (Left error) state`
 vs
 `Left error`
