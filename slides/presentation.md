@@ -174,9 +174,9 @@ try {
 ## What problem do monads NOT solve?
 
 ```
-const x = "Hello World!";
+const readOnlyConfig = ...;
 const f = function () {
-  console.log(x);
+  console.log(readOnlyConfig.age);
 };
 f();
 ```
@@ -275,15 +275,15 @@ By making `<-` hide more boilerplate
 
 ## Simulating Effects
 
-`global reference`
+`readOnlyConfig`
 
 ---
 
 ## Simulating Effects
 
-`global reference`
+`readOnlyConfig`
 
-`\globalRef -> ...`
+`\readOnlyConfig -> ...`
 
 ---
 
@@ -329,9 +329,9 @@ Have you seen that boilerplate?
 
 ## Simulating Effects with Boilerplate
 
-`global reference`
+`readOnlyConfig`
 
-`\globalRef -> ...`
+`\readOnlyConfig -> ...`
 
 ---
 
@@ -375,7 +375,7 @@ try {
 }
 ```
 
-`globalRef -> state -> Effect (Tuple (Either Error Output) State)`
+`readOnlyConfig -> state -> Effect (Tuple (Either Error Output) State)`
 
 ---
 
