@@ -599,13 +599,13 @@ Use type classes to encode business logic
 
 ## Usage & Mistakes
 
-Stack and Stack Order
+`npm run tc-stack-order`
 
 ---
 
 ## Usage & Mistakes
 
-`npm run tc-stack-order`
+Stack and Stack Order
 
 ---
 
