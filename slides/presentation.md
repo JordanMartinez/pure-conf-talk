@@ -218,6 +218,14 @@ x = 5;
 
 ---
 
+## Why use monad transformers?
+
+- Add such "effects"
+- Decouple code
+- Algebraic Effects (Tagless Final)
+
+---
+
 ## Agenda
 
 - What and Why
