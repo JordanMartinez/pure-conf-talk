@@ -107,7 +107,7 @@ Foreground = "do notation" syntax
 
 ## What problem do monads solve?
 
-Background = "`bind` implementation"
+Background = `bind` implementation
 
 ---
 
