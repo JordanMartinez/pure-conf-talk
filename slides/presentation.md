@@ -586,20 +586,7 @@ foo = runExceptT do
 
 ## Usage & Mistakes
 
-```
-foo :: Effect (Either String SomeValue)
-foo = runExceptT program
-  where
-  program
-    :: forall m
-     . MonadError String m
-    => m SomeValue
-  program = do
-    resp1 <- callApiRequest1
-    resp2 <- callApiRequest2
-    resp3 <- callApiRequest3
-    pure $ ...
-```
+Multiple Transformers?
 
 ---
 
