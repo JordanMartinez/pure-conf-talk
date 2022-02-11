@@ -455,6 +455,7 @@ runExceptT (ExceptT ma) = ma
 throwError :: forall m e o. Monad m =>
   e -> m (Either e o)
 throwError e = pure $ Left e
+```
 
 ---
 
