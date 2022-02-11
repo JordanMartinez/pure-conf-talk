@@ -15,7 +15,7 @@
     "common-function": "spago run -m CommonMonads.Function --no-psa --quiet",
     "common-all": "npm run common-identity && npm run common-right && npm run common-left1 && npm run common-left2 && npm run common-effect && npm run common-function && npm run common-effect",
     "painful-ps": "spago run -m PainfulExpression --no-psa --quiet",
-    "painful-js": "node src/01-CommonMonads/PainfulExpressionJs.js",
+    "painful-js": "node src/02-PainfulExpressionJs.js",
     "painful-all": "npm run painful-js && npm run painful-ps",
     "mt-right": "spago run -m MonadTransformers.ExceptT.Right --no-psa --quiet",
     "mt-left": "spago run -m MonadTransformers.ExceptT.Left --no-psa --quiet",
