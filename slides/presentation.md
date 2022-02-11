@@ -236,7 +236,7 @@ x = 5;
 
 ## Agenda
 
-- <del>What and Why</del>
+- ~~What and Why~~
 - Thought Process
 - Usage & Mistakes
 
@@ -521,7 +521,7 @@ put newState = pure (Tuple unit newState)
 
 ## Agenda
 
-- <del>What and Why</del>
+- ~~What and Why~~
 - Thought Process
 - Usage & Mistakes
 
@@ -529,8 +529,8 @@ put newState = pure (Tuple unit newState)
 
 ## Agenda
 
-- <del>What and Why</del>
-- <del>Thought Process</del>
+- ~~What and Why~~
+- ~~Thought Process~~
 - Usage & Mistakes
 
 ---
@@ -631,17 +631,17 @@ vs
 
 ## Agenda
 
-- <del>What and Why</del>
-- <del>Thought Process</del>
+- ~~What and Why~~
+- ~~Thought Process~~
 - Usage & Mistakes
 
 ---
 
 ## Agenda
 
-- <del>What and Why</del>
-- <del>Thought Process</del>
-- <del>Usage & Mistakes</del>
+- ~~What and Why~~
+- ~~Thought Process~~
+- ~~Usage & Mistakes~~
 
 ---
 
