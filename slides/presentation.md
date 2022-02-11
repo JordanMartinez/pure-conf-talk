@@ -249,13 +249,27 @@ x = 5;
 
 ## How do monad transformers solve these problems?
 
-By **simulating** these "effects"
+Macro: **simulate** "effects"
 
 ---
 
 ## How do monad transformers solve these problems?
 
-By making `<-` hide more boilerplate
+Micro: make `<-` hide more boilerplate
+
+---
+
+## How do monad transformers solve these problems?
+
+Input: monadic computation without effects
+
+---
+
+## How do monad transformers solve these problems?
+
+Input: monadic computation without an effect
+
+Output: monadic computation with an effect
 
 ---
 
