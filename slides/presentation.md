@@ -253,6 +253,12 @@ By **simulating** these "effects"
 
 ---
 
+## How do monad transformers solve these problems?
+
+By making `<-` hide more boilerplate
+
+---
+
 ## Simulating Effects
 
 `try ... catch`
