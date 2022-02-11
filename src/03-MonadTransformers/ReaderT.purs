@@ -2,7 +2,8 @@ module MonadTransformers.ReaderT where
 
 import Prelude
 
-import Control.Monad.Reader (runReader, runReaderT)
+import Control.Monad.Reader (runReaderT)
+import Data.Identity (Identity)
 import Effect (Effect)
 import Effect.Console (log)
 import MonadTransformers.ReaderT.Boilerplate (boilerplate)
@@ -37,4 +38,4 @@ main = do
     $ "ReaderT - Typeclass:       "
     -- Note: `runReaderT` could be replaced with `unwrap`
     -- from `Data.Newtype (unwrap)`
-    <> show ((runReader typeclass) 1)
+    <> show (((runReaderT typeclass) 1) :: Identity String)

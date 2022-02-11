@@ -1,4 +1,4 @@
-module MonadTransformers.Either.Left1 where
+module CommonMonads.Either.Left1 where
 
 import Prelude
 

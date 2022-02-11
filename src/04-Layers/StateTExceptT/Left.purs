@@ -2,8 +2,9 @@ module Layers.StateTExceptT.Left where
 
 import Prelude
 
-import Control.Monad.Except (runExcept, runExceptT)
+import Control.Monad.Except (runExceptT)
 import Control.Monad.State (runStateT)
+import Data.Identity (Identity)
 import Effect (Effect)
 import Effect.Console (log)
 import Layers.StateTExceptT.Left.Boilerplate (boilerplate)
@@ -32,4 +33,4 @@ main = do
     $ "StateTExcepT - Left - Typeclass:   "
     -- Note: `runStateT` and `runExceptT` could be replaced with `unwrap`
     -- from `Data.Newtype (unwrap)`
-    <> show (runExcept (runStateT typeclass 1))
+    <> show ((runExceptT (runStateT typeclass 1)) :: Identity _)

@@ -2,8 +2,9 @@ module Layers.StateTExceptT.Right where
 
 import Prelude
 
-import Control.Monad.Except (runExcept, runExceptT)
+import Control.Monad.Except (runExceptT)
 import Control.Monad.State (runStateT)
+import Data.Identity (Identity)
 import Effect (Effect)
 import Effect.Console (log)
 import Layers.StateTExceptT.Right.Boilerplate (boilerplate)
@@ -31,4 +32,4 @@ main = do
   log
     $ "StateTExcepT - Right - Typeclass:   "
     -- Note: using `runExcept` here forces the monad to be `Identity`
-    <> show (runExcept (runStateT typeclass 1))
+    <> show ((runExceptT (runStateT typeclass 1)) :: Identity _)
