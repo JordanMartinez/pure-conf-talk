@@ -4,9 +4,7 @@ import Prelude
 
 import Control.Monad.Except (class MonadError, runExcept, runExceptT, throwError)
 import Control.Monad.State (class MonadState, get, put, runState, runStateT)
-import Data.Either (Either)
 import Data.Identity (Identity)
-import Data.Tuple (Tuple)
 import Effect (Effect)
 import Effect.Console (log)
 
@@ -34,10 +32,10 @@ main = do
         -- The type annotation here is only needed because the
         -- monadic type is not specified. Is it `Identity`? `Either`? `Array`?
         -- The compiler has no way to know.
-        <> show (runExceptT (runStateT program 1) :: Identity (Either String (Tuple Boolean Int)))
+        <> show (runExceptT (runStateT program 1) :: Identity _)
   log
     $ "StateTExceptT - happy path: "
-        <> show (runStateT (runExceptT program) 1 :: Identity (Tuple (Either String Boolean) Int))
+        <> show (runStateT (runExceptT program) 1 :: Identity _)
 
   log "\nErrors"
   log
