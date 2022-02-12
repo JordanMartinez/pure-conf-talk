@@ -484,6 +484,12 @@ catchError ma handler = do
 
 ---
 
+## Implementing `try ... catch`
+
+Before vs After
+
+---
+
 ## Implementing `readOnlyValue`
 
 `monad output`
@@ -515,6 +521,12 @@ runReaderT (ReaderT argToMa) arg = argToMa arg
 ask :: forall m globalVal. Monad m => m globalVal
 ask = (\arg -> pure arg)
 ```
+
+---
+
+## Implementing `readOnlyValue`
+
+Before vs After
 
 ---
 
@@ -558,6 +570,12 @@ get = (\currentState -> pure (Tuple currentState currentState))
 put :: forall m state. Monad m => state -> m Unit
 put newState = pure (Tuple unit newState)
 ```
+
+---
+
+## Implementing `let x = 0; x += 1`
+
+Before vs After
 
 ---
 
