@@ -30,23 +30,23 @@ main :: Effect Unit
 main = do
   log "No Errors"
   log
-    $ "ExceptTStateT with initial state of 1: "
-    -- The type annotation here is only needed because the
-    -- monadic type is not specified. Is it `Identity`? `Either`? `Array`?
-    -- The compiler has no way to know.
-    <> show (runExceptT (runStateT program 1) :: Identity (Either String (Tuple Boolean Int)))
+    $ "ExceptTStateT - happy path: "
+        -- The type annotation here is only needed because the
+        -- monadic type is not specified. Is it `Identity`? `Either`? `Array`?
+        -- The compiler has no way to know.
+        <> show (runExceptT (runStateT program 1) :: Identity (Either String (Tuple Boolean Int)))
   log
-    $ "StateTExceptT with initial state of 1: "
-    <> show (runStateT (runExceptT program) 1 :: Identity (Tuple (Either String Boolean) Int))
+    $ "StateTExceptT - happy path: "
+        <> show (runStateT (runExceptT program) 1 :: Identity (Tuple (Either String Boolean) Int))
 
   log "\nErrors"
   log
-    $ "ExceptTStateT with initial state of 5: "
-    -- `runExcept` is `runExceptT` with the `monadicType` specified to `Identity`
-    -- So, no type annotation is needed here.
-    <> show (runExcept (runStateT program 5))
+    $ "ExceptTStateT - error path: "
+        -- `runExcept` is `runExceptT` with the `monadicType` specified to `Identity`
+        -- So, no type annotation is needed here.
+        <> show (runExcept (runStateT program 5))
   log
-    $ "StateTExceptT with initial state of 5: "
-    -- Each monad transformer has a `runNameT` and `runName` function
-    -- Both unwrap the newtype. The latter indicates the monad is `Identity`.
-    <> show (runState (runExceptT program) 5)
+    $ "StateTExceptT - error path: "
+        -- Each monad transformer has a `runNameT` and `runName` function
+        -- Both unwrap the newtype. The latter indicates the monad is `Identity`.
+        <> show (runState (runExceptT program) 5)
