@@ -62,6 +62,19 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
+## Audience Presumptions
+
+- Understand Monads
+
+---
+
+## Audience Presumptions
+
+- Understand Monads
+- Understand "do notation"
+
+---
+
 ## What problem do monads solve?
 
 ---
