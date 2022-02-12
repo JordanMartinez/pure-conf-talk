@@ -24,11 +24,16 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ---
 
-## Outcomes
+## Outcome
 
-- Why
-- Intuition
+---
+
+## Outcome
+
 - Use them now
+  - ExceptT
+  - ReaderT
+  - StateT
 
 ---
 
