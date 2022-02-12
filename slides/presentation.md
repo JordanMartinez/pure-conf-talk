@@ -45,14 +45,14 @@ https://github.com/JordanMartinez/pure-conf-talk
 
 ## Agenda
 
-- What and Why
+- Why & What
 - Thought Process
 
 ---
 
 ## Agenda
 
-- What and Why
+- Why & What
 - Thought Process
 - Usage & Mistakes
 
@@ -233,7 +233,7 @@ x = 5;
 
 ## Agenda
 
-- What and Why
+- Why & What
 - Thought Process
 - Usage & Mistakes
 
@@ -241,7 +241,7 @@ x = 5;
 
 ## Agenda
 
-- ~~What and Why~~
+- ~~Why & What~~
 - Thought Process
 - Usage & Mistakes
 
@@ -544,7 +544,7 @@ put newState = pure (Tuple unit newState)
 
 ## Agenda
 
-- ~~What and Why~~
+- ~~Why & What~~
 - Thought Process
 - Usage & Mistakes
 
@@ -552,7 +552,7 @@ put newState = pure (Tuple unit newState)
 
 ## Agenda
 
-- ~~What and Why~~
+- ~~Why & What~~
 - ~~Thought Process~~
 - Usage & Mistakes
 
@@ -649,7 +649,7 @@ vs
 
 ## Agenda
 
-- ~~What and Why~~
+- ~~Why & What~~
 - ~~Thought Process~~
 - Usage & Mistakes
 
@@ -657,7 +657,7 @@ vs
 
 ## Agenda
 
-- ~~What and Why~~
+- ~~Why & What~~
 - ~~Thought Process~~
 - ~~Usage & Mistakes~~
 
