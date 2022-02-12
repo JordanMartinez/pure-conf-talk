@@ -363,6 +363,12 @@ Have you seen that boilerplate?
 
 ## Simulating Effects with Boilerplate
 
+What happens if we compose these effects?
+
+---
+
+## Simulating Effects with Boilerplate
+
 ```
 try {
   let x = 5;
