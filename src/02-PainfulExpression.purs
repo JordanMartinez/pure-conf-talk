@@ -11,6 +11,7 @@ type ReadOnlyConfig =
   { age :: Int
   , max :: Int
   }
+
 type State = Int
 type Output = String
 type Error = String
@@ -24,6 +25,10 @@ main = do
 
 effect :: forall a. a -> Effect a
 effect = pure
+
+-- foo <- Identity a
+-- foo <- Effect a
+-- foo <- effect a
 
 example :: ReadOnlyConfig -> State -> Effect (Tuple (Either Error Output) State)
 example config initialState =
