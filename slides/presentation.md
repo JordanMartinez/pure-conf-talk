@@ -650,25 +650,25 @@ Stack and Stack Order
 
 ## Usage & Mistakes
 
+`state -> monad (Either err (Tuple output state)`
+vs
 `state -> monad (Tuple (Either err output) state)`
 
-`state -> monad (Either err (Tuple output state)`
-
 ---
 
 ## Usage & Mistakes
 
-`Tuple (Right output) state`
-vs
 `Right (Tuple output  state)`
+vs
+`Tuple (Right output) state`
 
 ---
 
 ## Usage & Mistakes
 
-`Tuple (Left error) state`
-vs
 `Left error`
+vs
+`Tuple (Left error) state`
 
 ---
 
