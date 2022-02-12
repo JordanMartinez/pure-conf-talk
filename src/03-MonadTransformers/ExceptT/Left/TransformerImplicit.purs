@@ -5,6 +5,7 @@ import Prelude
 import Control.Monad.Except (ExceptT, throwError)
 import Data.Identity (Identity)
 
+
 -- ExceptT monad's
 -- Left case
 transformerImplicit
