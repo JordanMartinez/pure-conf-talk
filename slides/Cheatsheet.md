@@ -71,7 +71,6 @@ ReaderT r (ExceptT e (StateT s m)) a
     e. if a `ReaderT r m a`, then sugar into `r -> m a`
 3. Go to step 1 until fully desugared
 
-
 ### Example
 
 ```purescript
