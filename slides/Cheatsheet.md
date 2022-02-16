@@ -105,9 +105,50 @@ r ->            s -> m (Tuple (Either e a) s)
 r -> s -> m (Tuple (Either e a) s)
 ```
 
-## Monad Transformer Stack Order
+## Monad Transformer Stack
 
-### Why It Matters
+Here's a simple monadic computation:
+`monad output`
+
+When we transform it with a transformer, it looks like we wrap the monad in layers
+`ExceptT error (monad) output`
+`StateT s (ExceptT error (monad)) output`
+`ReaderT reader (State state (ExceptT error (monad))) output`
+
+To remove the newtypes, we have to call their corresponding function `runXT` where `X` refers to `Reader`, `Except`, or `State`. We can visualize this as a stack where each call to the corresponding function "pops off" a layer from the stack. Starting with this...
+
+```
+-- Top of stack
+ReaderT
+StateT
+ExceptT
+monad
+-- Bottom of stack
+```
+
+we unwrap each transformer one at a time.
+
+```
+-- start
+ReaderT
+StateT
+ExceptT
+monad
+
+-- result after `runReaderT`
+StateT
+ExceptT
+monad
+
+-- result after `runStateT`
+ExceptT
+monad
+
+-- result after `runExceptT`
+monad
+```
+
+### Why the Order of a Monad Transformer Stack Matters
 
 Most of the time, the order of the stack itself doesn't matter unless one is using either `MaybeT` or `ExceptT` somewhere because it short-circuits. Due to the need to throw and catch errors, one of these two transformers is usually the first layer that wraps the "base" monad.
 
@@ -118,16 +159,36 @@ Most of the time, the order of the stack itself doesn't matter unless one is usi
 | `ExceptT error (StateT s Identity output)` | `state -> Identity (Tuple state (Either error output))` | A computation that returns back some state and the result of a short-circuiting computation                                      | If a `Left` case occurs, you still have the final `state` value       |
 | `StateT s (ExceptT error Identity output)` | `state -> Identity (Either error (Tuple state output))` | A short-circuting computation that, when fully successful, returns back the computation's result and some state                  | If a `Left` case occurs, you lose what the final `state` value was    |
 
-### Ordering the Stack
+### Running the Stack
 
-Type Signatures: outermost to innermost
+Because the outermost transformer in the type signature must be unwrapped **first**, it is the **first** `run...T` function called, not the last.
+
+| Position in stack | Type Signature Position | `run...T` position |
+| ----------------- | ----------------------- | ------------------ |
+| Top               | Outermost               | Called first       |
+| Bottom            | Innermost               | Called last        |
+
 ```purescript
+-- The "stack" is:
+--    StateT
+--    ExceptT
+--    monad
 program
   :: forall monad output
    . Monad monad
-  => StateT Int (ExceptT String monad) output
-```
-Unwrapping: innermost is on the outside because it's the *last* newtype to unwrap. Outermost is on the inside because it's the *first* newtype to unwrap.
-```purescript
-runExceptT (runStateT program initialState)
+  => StateT Int (ExceptT String monad) output                         {-
+  => Int -> ExceptT String monad (Tuple output Int)
+  => Int ->                monad (Tuple (Either String output) Int)   -}
+program = do
+ ...
+
+runProgram :: monad (Tuple (Either String output) Int)
+runProgram =
+  bottomLayerUnwrapped -- i.e. runExceptT (runStateT program initialState)
+  where
+  topLayerUnwrapped :: ExceptT String monad (Tuple output Int)
+  topLayerUnwrapped = runStateT program initialIntState
+
+  bottomLayerUnwrapped :: monad (Tuple (Either String output) Int)
+  bottomLayerUnwrapped = runExceptT topLayerUnwrapped
 ```
