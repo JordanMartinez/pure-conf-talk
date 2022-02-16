@@ -5,10 +5,60 @@
 1. Look at the output type and sugar accordingly:
     a. if a `Maybe a`, then `m` becomes `MaybeT m`
     b. if an `Either e a`, then sugar into `ExceptT e m`
-    c. if a `Tuple a x` where `x` is a standalone `Monoid`, then sugar into `WriterT x m a`
-    d. if a `Tuple a x` where `x` is part of a function argument's type, then sugar into `StateT x m a`
+    c. if a `Tuple a x`
+        - if `x` is a standalone `Monoid`, then sugar into `WriterT x m a`
+        - if `x` is passed in via a function argument, then sugar into `StateT x m a`
     e. if just an `a` and the monad is the output of a single-arg function (`r -> m a`), then sugar into a `ReaderT r m a`
 2. Repeat step 2 until fully sugared
+
+### Example
+
+```purescript
+-- 1. Identify the base monad
+r -> s -> m (Tuple (Either e a) s)
+--        ^
+
+-- 2. Look at the output type and identify transformer
+r -> s -> m (Tuple (Either e a) s)
+-- > Check 1: Output is Tuple
+--        m (Tuple (a         ) s)
+-- > Check 2: is `s` standalone (i.e. WriterT) or passed in via function (i.e. StateT)?
+--   s ->                       s
+-- > Answer: Passed in via function. Use `StateT`
+
+-- 3. Sugar accordingly
+r -> s -> m (Tuple (Either e a) s)                {-
+r -> s -> m (Tuple (a         ) s)                -}
+r -> StateT s m (Either e a)
+
+-- 4. Identify the base monad
+r -> StateT s m (Either e a)
+--   ^^^^^^^^^^
+
+-- 5. Look at the output type and identify transformer
+r -> StateT s m (Either e a)
+--               ^^^^^^^^^^
+-- > Output is Either
+--               Either e a
+-- > Answer: ExceptT
+
+-- 6. Sugar accordingly
+r -> StateT s m (Either e a)                {-
+r -> m          (Either e a)                -}
+r -> ExceptT e (StateT s m) a
+
+-- 7. Look at the output type and identify transformer
+r -> ExceptT e (StateT s m) a                               {-
+                            ^
+> Output is unchanged. Is there a function argument?
+r -> m                      a
+> Answer: ReaderT                                           -}
+
+-- 7. Sugar accordingly
+r -> ExceptT e (StateT s m) a                               {-
+r -> m                      a                               -}
+ReaderT r (ExceptT e (StateT s m)) a
+```
 
 ## Desugaring a Monad Transformer Stack into a Concrete Type
 
