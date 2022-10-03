@@ -1,8 +1,9 @@
 # pure-conf-talk
 
-Slides and other goodies for my PureConf 2022 talk: "Using Monad Transformers without understanding them"
+Slides and other goodies for my PureConf 2022 talk: "**Using Monad Transformers without understanding them**"
 
 See
+- [Video](https://hasgeek.com/FP-Juspay/pureconf/schedule/using-monad-transformers-without-understanding-them-JAFRaaAiVQBaBfVX3Yuruv)
 - [Slides](./slides/presentation.pdf)
 - [Cheatsheet](./slides/Cheatsheet.md) - things I didn't cover in my talk but are still useful to know
 - the [src](./src) directory
